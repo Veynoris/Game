@@ -1,0 +1,342 @@
+/* =====================================================================
+   La Conjugaison Espagnole: print stylesheet (WeasyPrint)
+   ===================================================================== */
+
+/* ---------- fonts (Google Fonts, bundled locally: SIL OFL) ---------- */
+@font-face { font-family: "Guide Fraunces"; font-weight: 400; font-style: normal; src: url("fonts/fraunces-latin-400-normal.woff"); }
+@font-face { font-family: "Guide Fraunces"; font-weight: 400; font-style: italic; src: url("fonts/fraunces-latin-400-italic.woff"); }
+@font-face { font-family: "Guide Fraunces"; font-weight: 500; font-style: normal; src: url("fonts/fraunces-latin-500-normal.woff"); }
+@font-face { font-family: "Guide Fraunces"; font-weight: 600; font-style: normal; src: url("fonts/fraunces-latin-600-normal.woff"); }
+@font-face { font-family: "Guide Fraunces"; font-weight: 600; font-style: italic; src: url("fonts/fraunces-latin-600-italic.woff"); }
+@font-face { font-family: "Guide Fraunces"; font-weight: 700; font-style: normal; src: url("fonts/fraunces-latin-700-normal.woff"); }
+@font-face { font-family: "Guide Inter"; font-weight: 400; font-style: normal; src: url("fonts/inter-latin-400-normal.woff"); }
+@font-face { font-family: "Guide Inter"; font-weight: 400; font-style: italic; src: url("fonts/inter-latin-400-italic.woff"); }
+@font-face { font-family: "Guide Inter"; font-weight: 500; font-style: normal; src: url("fonts/inter-latin-500-normal.woff"); }
+@font-face { font-family: "Guide Inter"; font-weight: 600; font-style: normal; src: url("fonts/inter-latin-600-normal.woff"); }
+@font-face { font-family: "Guide Inter"; font-weight: 700; font-style: normal; src: url("fonts/inter-latin-700-normal.woff"); }
+@font-face { font-family: "Guide Inter"; font-weight: 700; font-style: italic; src: url("fonts/inter-latin-700-italic.woff"); }
+
+:root {
+  --cream: #FBF7F0;
+  --paper: #FFFDF9;
+  --terracotta: #C65D3B;
+  --terracotta-soft: #F4DED4;
+  --olive: #7A8B5C;
+  --olive-soft: #E7EBDD;
+  --sun: #F2C14E;
+  --sun-soft: #FBEBC4;
+  --blue: #5B7DB1;
+  --blue-soft: #DFE6F1;
+  --ink: #2B2B2B;
+  --muted: #7B746B;
+  --line: #E5DBCD;
+  --tint: #F6EFE4;
+}
+
+/* ---------- pages ---------- */
+@page {
+  size: A4;
+  margin: 22mm 19mm 20mm 19mm;
+  background: #FBF7F0;
+  @top-left {
+    content: string(part);
+    font: 600 7.5pt "Guide Inter", "DejaVu Sans";
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #C65D3B;
+    vertical-align: bottom;
+    padding-bottom: 4mm;
+  }
+  @top-right {
+    content: string(section);
+    font: 400 7.5pt "Guide Inter", "DejaVu Sans";
+    color: #7B746B;
+    vertical-align: bottom;
+    padding-bottom: 4mm;
+  }
+  @bottom-center {
+    content: counter(page);
+    font: 600 8pt "Guide Inter", "DejaVu Sans";
+    color: #C65D3B;
+    vertical-align: top;
+    padding-top: 5mm;
+  }
+}
+@page cover   { margin: 0; @top-left { content: none } @top-right { content: none } @bottom-center { content: none } }
+@page divider { margin: 0; @top-left { content: none } @top-right { content: none } @bottom-center { content: none } }
+@page front   { @top-left { content: none } @top-right { content: none } }
+
+html { font-family: "Guide Inter", "DejaVu Sans", sans-serif; font-size: 10.5pt; line-height: 1.5; color: #2B2B2B; }
+body { margin: 0; }
+* { box-sizing: border-box; }
+
+/* ---------- headings ---------- */
+h1, h2, h3, h4 { font-family: "Guide Fraunces", "DejaVu Serif", serif; font-weight: 600; color: #2B2B2B; margin: 0; line-height: 1.2; }
+h2.sec {
+  font-size: 21pt; color: #C65D3B; margin: 0 0 5mm 0;
+  string-set: section attr(data-hdr);
+  bookmark-level: 2; bookmark-label: content(text);
+}
+h2.sec .num {
+  display: inline-block; font-family: "Guide Inter", "DejaVu Sans"; font-size: 8.5pt; font-weight: 700;
+  color: #FFFDF9; background: #C65D3B; border-radius: 3pt; padding: 0.5pt 5pt; margin-right: 3mm;
+  vertical-align: 4pt; letter-spacing: 0.04em;
+}
+h3 { font-size: 13pt; margin: 6mm 0 2.5mm; color: #2B2B2B; }
+h3 .tag { font-family: "Guide Inter", "DejaVu Sans"; font-size: 8pt; font-weight: 600; color: #7B746B; margin-left: 2mm; letter-spacing: 0.03em; }
+h4 { font-family: "Guide Inter", "DejaVu Sans"; font-size: 8pt; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #7B746B; margin: 4mm 0 2mm; }
+
+.sec-start { break-before: page; }
+.keep { break-inside: avoid; }
+p { margin: 0 0 2.6mm; max-width: 128mm; orphans: 3; widows: 3; }
+p.lead { font-size: 11.5pt; color: #4A4640; max-width: 132mm; margin-bottom: 4mm; }
+.muted { color: #7B746B; }
+.small { font-size: 8.5pt; }
+b, strong { font-weight: 600; }
+em { font-style: italic; }
+.es { font-weight: 600; }
+.fr { font-style: italic; color: #6C5F52; }
+ul.clean { margin: 0 0 3mm; padding-left: 4.5mm; max-width: 130mm; }
+ul.clean li { margin-bottom: 1mm; }
+.arrow { font-family: "DejaVu Sans"; font-size: 0.85em; color: #7B746B; }
+
+/* ---------- colour coding ---------- */
+.e-ar { color: #C65D3B; font-weight: 700; }
+.e-er { color: #6E7F50; font-weight: 700; }
+.e-ir { color: #5B7DB1; font-weight: 700; }
+.c-ar { --c: #C65D3B; --cs: #F4DED4; }
+.c-er { --c: #7A8B5C; --cs: #E7EBDD; }
+.c-ir { --c: #5B7DB1; --cs: #DFE6F1; }
+.irr { border-bottom: 1.1pt dotted #C65D3B; padding-bottom: 0.2pt; }
+.whole { font-weight: 700; }
+.pron { color: #7B746B; font-weight: 500; }
+.na { color: #B8AFA3; }
+.pill {
+  display: inline-block; background: #F2C14E; color: #2B2B2B; font-weight: 700;
+  border-radius: 7pt; padding: 0 3.2pt; margin-left: 0.4pt; line-height: 1.25;
+}
+.pill.lg { font-size: 12pt; padding: 0.5pt 7pt; }
+.mk-exc { border-bottom: 1.1pt dotted #C65D3B; }
+b.hl { font-weight: 700; color: #C65D3B; }
+
+/* ---------- conjugation tables ---------- */
+.tbl {
+  border: 0.7pt solid #E5DBCD; border-radius: 7pt; overflow: hidden;
+  background: #FFFDF9; break-inside: avoid;
+}
+.tbl table { width: 100%; border-collapse: collapse; }
+.tbl td, .tbl th { padding: 1.35mm 2.6mm; text-align: left; vertical-align: baseline; }
+.tbl tr:nth-child(even) td { background: #F8F2E8; }
+.tbl td.per { color: #7B746B; font-size: 8.2pt; width: 34%; white-space: nowrap; }
+.tbl td.frm { font-size: 10.5pt; font-feature-settings: "tnum"; }
+.tbl .head {
+  padding: 2mm 2.6mm 1.6mm; border-top: 3pt solid var(--c); background: var(--cs);
+}
+.tbl .head .vb { font-family: "Guide Fraunces", "DejaVu Serif"; font-weight: 600; font-size: 12.5pt; color: #2B2B2B; }
+.tbl .head .mean { font-size: 8pt; color: #6C655C; margin-left: 1.5mm; }
+.tbl .head .tag { float: right; font-size: 7.5pt; font-weight: 700; color: var(--c); letter-spacing: 0.05em; text-transform: uppercase; margin-top: 1.4mm; }
+.tbl.compact td { padding: 0.9mm 2.2mm; }
+.tbl.compact td.frm { font-size: 9.8pt; }
+.tbl.compact td.per { font-size: 7.8pt; width: 30%; }
+
+.grid { display: grid; gap: 4mm; margin: 0 0 4mm; }
+.g2 { grid-template-columns: 1fr 1fr; }
+.g3 { grid-template-columns: 1fr 1fr 1fr; }
+.g4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+.ex-list { margin: 2mm 0 0; padding: 0; list-style: none; font-size: 9pt; }
+.ex-list li { margin: 0 0 1.4mm; padding-left: 3.4mm; position: relative; }
+.ex-list li::before { content: ""; position: absolute; left: 0; top: 1.9mm; width: 1.4mm; height: 1.4mm; border-radius: 50%; background: #F2C14E; }
+.ex-list .tr { display: block; color: #7B746B; font-size: 8.2pt; }
+
+/* wide data tables (reference) */
+table.data { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 9.5pt; }
+table.data th { font-family: "Guide Inter", "DejaVu Sans"; font-size: 7.6pt; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #7B746B; text-align: left; padding: 1.8mm 2.4mm; border-bottom: 0.8pt solid #E5DBCD; background: #F6EFE4; }
+table.data td { padding: 1.5mm 2.4mm; border-bottom: 0.5pt solid #EFE7DA; vertical-align: baseline; }
+table.data tr:last-child td { border-bottom: none; }
+table.data tbody tr:nth-child(even) td { background: #F8F2E8; }
+table.data td.per { color: #7B746B; font-size: 8pt; white-space: nowrap; }
+
+/* ---------- callouts ---------- */
+.callout {
+  border-radius: 7pt; padding: 3mm 4mm 3mm 4mm; margin: 3mm 0 4mm; break-inside: avoid;
+  font-size: 9.6pt; line-height: 1.45;
+}
+.callout p, .callout ul { max-width: none; }
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+.callout .ttl { font-family: "Guide Inter", "DejaVu Sans"; font-weight: 700; font-size: 8pt; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1.4mm; }
+.callout .ttl svg { width: 11pt; height: 11pt; vertical-align: -2.2pt; margin-right: 1.4mm; }
+.callout.trick   { background: #E7EBDD; border-left: 2.4pt solid #7A8B5C; }
+.callout.trick .ttl { color: #5B6A40; }
+.callout.trap    { background: #F7E3DA; border-left: 2.4pt solid #C65D3B; }
+.callout.trap .ttl { color: #A84A2B; }
+.callout.pattern { background: #FBEECB; border-left: 2.4pt solid #E0AC2E; }
+.callout.pattern .ttl { color: #8E6A12; }
+.callout.practice { background: #FFFDF9; border: 0.8pt solid #E5DBCD; }
+.callout.practice .ttl { color: #2B2B2B; }
+.callout ul { padding-left: 4.5mm; margin: 0; }
+.callout li { margin-bottom: 0.8mm; }
+
+/* ---------- formula (Part 0) ---------- */
+.formula { margin: 5mm 0 6mm; text-align: center; break-inside: avoid; }
+.formula .row { display: block; margin-bottom: 3mm; }
+.blk { display: inline-block; text-align: center; vertical-align: top; margin: 0 1mm; }
+.blk .box { display: block; border-radius: 6pt; padding: 2.2mm 4.5mm; font-size: 17pt; font-weight: 700; font-family: "Guide Inter", "DejaVu Sans"; }
+.blk .lab { display: block; font-size: 7pt; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #7B746B; margin-top: 1.4mm; }
+.box.stem { background: #FFFDF9; border: 1pt solid #E5DBCD; color: #2B2B2B; }
+.box.vow  { background: var(--cs); color: var(--c); }
+.box.mrk  { background: #F2C14E; color: #2B2B2B; }
+.box.res  { background: transparent; color: #2B2B2B; font-family: "Guide Fraunces", "DejaVu Serif"; font-weight: 600; padding-left: 1mm; padding-right: 1mm; }
+.op { display: inline-block; font-size: 16pt; color: #B8AFA3; vertical-align: top; margin-top: 2mm; font-weight: 400; }
+.formula.small .box { font-size: 12pt; padding: 1.4mm 3.2mm; }
+.formula.small .op { font-size: 12pt; margin-top: 1.2mm; }
+.formula.small .row { margin-bottom: 2mm; }
+
+/* ---------- boot diagram ---------- */
+table.boot { border-collapse: separate; border-spacing: 0; width: 100%; font-size: 9.6pt; }
+table.boot td { padding: 1.6mm 2.4mm; width: 50%; border: 1.6pt solid transparent; }
+table.boot td .p { display: block; font-size: 6.8pt; color: #7B746B; letter-spacing: 0.04em; }
+table.boot td.in { background: var(--cs); }
+table.boot td.out { background: #FFFDF9; }
+table.boot td.bt { border-top-color: var(--c); }
+table.boot td.bl { border-left-color: var(--c); }
+table.boot td.br { border-right-color: var(--c); }
+table.boot td.bb { border-bottom-color: var(--c); }
+table.boot td.r-tl { border-top-left-radius: 7pt; }
+table.boot td.r-tr { border-top-right-radius: 7pt; }
+table.boot td.r-bl { border-bottom-left-radius: 7pt; }
+table.boot td.r-br { border-bottom-right-radius: 7pt; }
+.bootcard { break-inside: avoid; }
+.bootcard .bh { font-family: "Guide Fraunces", "DejaVu Serif"; font-weight: 600; font-size: 12pt; margin-bottom: 1.2mm; }
+.bootcard .bh .mean { font-family: "Guide Inter", "DejaVu Sans"; font-weight: 400; font-size: 8pt; color: #7B746B; margin-left: 1.2mm; }
+.bootcard .bx { font-size: 8.4pt; color: #6C655C; margin-top: 1.4mm; }
+.change-pill { display: inline-block; font-family: "Guide Inter", "DejaVu Sans"; font-size: 8pt; font-weight: 700; color: #FFFDF9; background: #C65D3B; border-radius: 7pt; padding: 0.5pt 6pt; vertical-align: 2pt; margin-left: 2mm; }
+
+/* ---------- exercises ---------- */
+.exgroup { break-inside: avoid; margin-bottom: 4.5mm; }
+.exgroup h4 { margin-top: 0; color: #2B2B2B; }
+ol.ex { margin: 0; padding: 0; list-style: none; counter-reset: none; }
+ol.ex li { margin: 0 0 2.4mm; padding-left: 8mm; position: relative; font-size: 10.2pt; }
+ol.ex li .n { position: absolute; left: 0; top: 0.3mm; width: 5.4mm; height: 5.4mm; line-height: 5.4mm; border-radius: 50%; background: #F6EFE4; color: #C65D3B; font-weight: 700; font-size: 7.6pt; text-align: center; }
+.blank { display: inline-block; width: 24mm; border-bottom: 0.9pt solid #B8AFA3; margin: 0 1mm; vertical-align: -0.6mm; }
+.ex-cols { columns: 2; column-gap: 8mm; }
+.ex-cols li { break-inside: avoid; }
+
+/* ---------- answer key ---------- */
+.answers { columns: 2; column-gap: 9mm; font-size: 9.2pt; }
+.answers h3 { break-after: avoid; margin-top: 3mm; font-size: 12pt; }
+.answers .grp { break-inside: avoid; margin-bottom: 2.5mm; }
+.answers .grp .gt { font-size: 7.6pt; font-weight: 700; color: #7B746B; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.8mm; }
+.answers ol { margin: 0; padding: 0; list-style: none; }
+.answers li { margin-bottom: 0.6mm; }
+.answers li .n { display: inline-block; width: 6mm; color: #C65D3B; font-weight: 700; font-size: 8pt; }
+
+/* ---------- cover ---------- */
+.cover { page: cover; position: relative; width: 210mm; height: 297mm; overflow: hidden; background: #FBF7F0; }
+.cover .tiles { position: absolute; top: 0; left: 0; width: 210mm; height: 42mm; }
+.cover .sun { position: absolute; left: 30mm; top: 70mm; width: 150mm; height: 95mm; }
+.cover .titlebox { position: absolute; left: 22mm; right: 22mm; top: 172mm; text-align: center; }
+.cover .kicker { font-size: 8.5pt; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; color: #7A8B5C; margin-bottom: 4mm; }
+.cover h1 { font-size: 40pt; color: #2B2B2B; font-weight: 600; letter-spacing: -0.01em; line-height: 1.05; bookmark-level: none; }
+.cover h1 em { color: #C65D3B; font-style: italic; }
+.cover .sub { font-family: "Guide Fraunces", "DejaVu Serif"; font-style: italic; font-size: 15pt; color: #6C5F52; margin-top: 4mm; }
+.cover .tag { display: inline-block; margin-top: 9mm; font-size: 9pt; color: #2B2B2B; background: #F2C14E; border-radius: 20pt; padding: 1.6mm 6mm; font-weight: 600; }
+.cover .foot { position: absolute; bottom: 16mm; left: 22mm; right: 22mm; text-align: center; font-size: 8.5pt; color: #7B746B; }
+.cover .foot .dots span { display: inline-block; width: 2.4mm; height: 2.4mm; border-radius: 50%; margin: 0 1.2mm; }
+
+/* ---------- part dividers ---------- */
+.divider { page: divider; position: relative; width: 210mm; height: 297mm; overflow: hidden; break-before: page; background: #FBF7F0; }
+.divider .bignum { position: absolute; left: 22mm; top: 58mm; font-family: "Guide Fraunces", "DejaVu Serif"; font-weight: 600; font-size: 190pt; line-height: 1; color: #C65D3B; }
+.divider .ttl { position: absolute; left: 24mm; right: 30mm; top: 150mm; }
+.divider .ttl .kick { font-size: 8.5pt; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: #7A8B5C; }
+.divider .ttl h1 { font-size: 36pt; margin-top: 3mm; bookmark-level: 1; bookmark-label: content(text); }
+.divider .pm { string-set: part attr(data-part); height: 0; }
+.divider .bignum .sunmini { width: 95mm; height: 60mm; }
+.divider .ttl li .n svg { width: 9pt; height: 9pt; vertical-align: -1pt; }
+h2.sec .num svg { width: 9pt; height: 9pt; vertical-align: -1.5pt; }
+.divider .ttl .sum { font-family: "Guide Fraunces", "DejaVu Serif"; font-style: italic; font-size: 14pt; color: #6C5F52; margin-top: 5mm; max-width: 125mm; line-height: 1.4; }
+.divider .ttl ul { list-style: none; padding: 0; margin: 9mm 0 0; font-size: 9.5pt; color: #4A4640; }
+.divider .ttl li { padding: 1.3mm 0; border-bottom: 0.5pt solid #E5DBCD; max-width: 120mm; }
+.divider .ttl li .n { display: inline-block; width: 10mm; color: #C65D3B; font-weight: 700; font-size: 8.5pt; }
+.divider .deco { position: absolute; right: 0; top: 0; width: 72mm; height: 297mm; }
+
+/* ---------- TOC ---------- */
+.toc { page: front; }
+.toc h2 { font-size: 26pt; color: #C65D3B; margin-bottom: 7mm; }
+.toc .part { margin-bottom: 3.4mm; break-inside: avoid; }
+.toc .part > a { display: block; font-family: "Guide Fraunces", "DejaVu Serif"; font-size: 13pt; font-weight: 600; color: #2B2B2B; text-decoration: none; padding: 1mm 0; }
+.toc .part > a .pn { display: inline-block; width: 9mm; color: #C65D3B; }
+.toc a::after { content: leader(dotted) target-counter(attr(href), page); color: #7B746B; font-family: "Guide Inter", "DejaVu Sans"; font-size: 9pt; font-weight: 600; }
+.toc ul { list-style: none; margin: 0 0 0 9mm; padding: 0; }
+.toc li a { display: block; font-size: 9.6pt; color: #4A4640; text-decoration: none; padding: 0.5mm 0; }
+.toc li a .sn { display: inline-block; width: 9mm; color: #7B746B; font-size: 8pt; font-weight: 600; }
+
+/* ---------- key page ---------- */
+.keygrid { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm 8mm; margin-top: 3mm; }
+.keyitem { font-size: 9.4pt; break-inside: avoid; }
+.keyitem .sw { display: inline-block; width: 9mm; height: 3.2mm; border-radius: 2pt; vertical-align: -0.4mm; margin-right: 2mm; }
+
+/* ---------- misc ---------- */
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+.note { font-size: 8.4pt; color: #7B746B; margin-top: 1.5mm; }
+.chip { display: inline-block; font-size: 8pt; font-weight: 600; padding: 0.3mm 2.4mm; border-radius: 8pt; background: #F6EFE4; color: #4A4640; margin: 0 1mm 1mm 0; }
+.timeline { margin: 3mm 0 5mm; break-inside: avoid; position: relative; }
+.timeline svg { width: 100%; height: auto; }
+.steps { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4mm; margin: 3mm 0 5mm; }
+.step { background: #FFFDF9; border: 0.7pt solid #E5DBCD; border-radius: 7pt; padding: 3mm; break-inside: avoid; }
+.step .sn { display: inline-block; width: 6mm; height: 6mm; line-height: 6mm; border-radius: 50%; background: #C65D3B; color: #FFFDF9; text-align: center; font-weight: 700; font-size: 8.5pt; margin-bottom: 1.6mm; }
+.step .st { font-family: "Guide Fraunces", "DejaVu Serif"; font-weight: 600; font-size: 11.5pt; display: block; margin-bottom: 1mm; }
+.step .sx { font-size: 9pt; color: #4A4640; }
+.idx { columns: 2; column-gap: 9mm; font-size: 9pt; }
+.idx .it { break-inside: avoid; margin-bottom: 2mm; }
+.idx .it .w { font-family: "Guide Fraunces", "DejaVu Serif"; font-weight: 600; font-size: 10.5pt; }
+.idx .it .m { color: #7B746B; font-size: 8pt; margin-left: 1mm; }
+.idx .it a { color: #4A4640; text-decoration: none; display: block; padding-left: 3mm; font-size: 8.4pt; }
+.idx .it a::after { content: leader(dotted) target-counter(attr(href), page); color: #C65D3B; font-weight: 600; }
+.qr-block { break-inside: avoid; margin-bottom: 7mm; }
+.qr-block .qh { display: flex; align-items: baseline; margin-bottom: 2mm; }
+.qr-block .qh .vb { font-family: "Guide Fraunces", "DejaVu Serif"; font-weight: 600; font-size: 17pt; color: #2B2B2B; }
+.qr-block .qh .mean { margin-left: 3mm; font-size: 9pt; color: #6C655C; }
+.qr-block .qh .fr { margin-left: 2mm; font-size: 9pt; }
+.qr-block .qh .no { margin-left: auto; font-size: 8pt; font-weight: 700; color: #C65D3B; }
+table.qr { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 8.6pt; border: 0.7pt solid #E5DBCD; border-radius: 7pt; background: #FFFDF9; }
+table.qr th { font-size: 6.6pt; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #7B746B; text-align: left; padding: 1.5mm 1.4mm; background: var(--cs); border-bottom: 0.7pt solid #E5DBCD; }
+table.qr th:first-child { border-top-left-radius: 7pt; }
+table.qr th:last-child { border-top-right-radius: 7pt; }
+table.qr td { padding: 1.1mm 1.4mm; border-bottom: 0.4pt solid #EFE7DA; white-space: nowrap; }
+table.qr tr:last-child td { border-bottom: none; }
+table.qr tbody tr:nth-child(even) td { background: #F8F2E8; }
+table.qr td.per { color: #7B746B; font-size: 7.4pt; }
+.qr-extra { font-size: 8.4pt; margin-top: 1.8mm; color: #4A4640; }
+.qr-extra .lbl { font-size: 6.8pt; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #7B746B; margin-right: 1.2mm; }
+.qr-extra .sep { color: #D6CCBE; margin: 0 1.6mm; }
+.master .grid { gap: 3.4mm; }
+.master .tbl td { padding: 0.75mm 2mm; }
+.master .tbl td.frm { font-size: 9.2pt; }
+.master .tbl td.per { font-size: 7.2pt; width: 26%; }
+.master .tbl .head { padding: 1.4mm 2mm 1.1mm; }
+.master .tbl .head .vb { font-size: 10pt; }
+.master-head { display: flex; align-items: baseline; margin-bottom: 4mm; }
+.master-head .vb { font-family: "Guide Fraunces", "DejaVu Serif"; font-size: 30pt; font-weight: 600; }
+.master-head .mean { margin-left: 4mm; color: #6C655C; }
+.master-head .nf { margin-left: auto; font-size: 9pt; }
+
+.toc-cols { columns: 2; column-gap: 10mm; }
+.cols2 .ex-list { columns: 2; column-gap: 8mm; }
+.cols2 .ex-list li { break-inside: avoid; }
+
+.timeline svg { display: block; }
+.timeline .tl { position: absolute; font-size: 9.5pt; color: #2B2B2B; white-space: nowrap; }
+.timeline .tl-k { font-size: 7.5pt; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #5B6A40; }
+.timeline .tl-r { color: #A84A2B; }
+.timeline .tl-o { color: #5B6A40; }
+.timeline .tl-e { font-weight: 700; color: #C65D3B; transform: translateX(-50%); }
+.timeline .tl-t { font-size: 7.5pt; color: #7B746B; }
+table.data.tight td { padding: 1mm 2.2mm; }
+table.data.tight td br + .muted { line-height: 1.25; }
+
+.grid > *, .two > * { min-width: 0; }
+.two { margin-bottom: 4mm; }
+h2.sec:not(.sec-start) { margin-top: 9mm; }
+
+h3, h4 { bookmark-level: none; }

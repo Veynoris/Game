@@ -1,0 +1,116 @@
+{# ===================== icons (inline SVG) ===================== #}
+{% macro icon(kind) -%}
+{% if kind == 'trick' %}<svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="6.2" fill="#F2C14E" stroke="#5B6A40" stroke-width="1.6"/><rect x="9" y="16.6" width="6" height="2.4" rx="1" fill="#5B6A40"/><rect x="10" y="19.8" width="4" height="1.8" rx="0.9" fill="#5B6A40"/><path d="M10 10.5 L12 8 L14 10.5" fill="none" stroke="#5B6A40" stroke-width="1.3" stroke-linecap="round"/></svg>
+{%- elif kind == 'trap' %}<svg viewBox="0 0 24 24"><path d="M12 3 L22 20.5 H2 Z" fill="#F2C14E" stroke="#A84A2B" stroke-width="1.6" stroke-linejoin="round"/><rect x="11" y="9" width="2" height="6.2" rx="1" fill="#A84A2B"/><circle cx="12" cy="17.6" r="1.2" fill="#A84A2B"/></svg>
+{%- elif kind == 'pattern' %}<svg viewBox="0 0 24 24"><path d="M5 10 A7.5 7.5 0 0 1 18.5 7.5" fill="none" stroke="#8E6A12" stroke-width="2" stroke-linecap="round"/><path d="M19 3.5 V8 H14.5" fill="none" stroke="#8E6A12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 14 A7.5 7.5 0 0 1 5.5 16.5" fill="none" stroke="#8E6A12" stroke-width="2" stroke-linecap="round"/><path d="M5 20.5 V16 H9.5" fill="none" stroke="#8E6A12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+{%- elif kind == 'practice' %}<svg viewBox="0 0 24 24"><path d="M4 20 L5 15.5 L16 4.5 L19.5 8 L8.5 19 Z" fill="#F2C14E" stroke="#2B2B2B" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 6.5 L17.5 10" stroke="#2B2B2B" stroke-width="1.5"/><path d="M4 20 L5 15.5 L8.5 19 Z" fill="#2B2B2B"/></svg>
+{%- endif %}
+{%- endmacro %}
+
+{% macro callout(kind, title) -%}
+<div class="callout {{ kind }}"><div class="ttl">{{ icon(kind) }}{{ title }}</div>{{ caller() }}</div>
+{%- endmacro %}
+
+{# ===================== section heading ===================== #}
+{% macro sec(sid, start=True) -%}
+{{ section(sid) }}<h2 class="sec{% if start %} sec-start{% endif %}" id="{{ sid }}" data-hdr="{{ HDR[sid] }}"><span class="num">{% if sid.startswith('ex-') %}{{ icon('practice') }}{% else %}{{ SN[sid] }}{% endif %}</span>{{ ST[sid] }}</h2>
+{%- endmacro %}
+
+{# ===================== conjugation table ===================== #}
+{% macro ctable(verb, tense, tag=None, compact=False, short=True, head=True, title=None) -%}
+<div class="tbl c-{{ cls(verb) }}{% if compact %} compact{% endif %}"{{ reg(verb) }}>
+  {% if head %}<div class="head"><span class="vb">{{ title or verb }}</span>{% if not title %}<span class="mean">{{ V[verb].fr }}</span>{% endif %}{% if tag %}<span class="tag">{{ tag }}</span>{% endif %}</div>{% endif %}
+  <table>
+  {% for i in range(6) %}
+    <tr><td class="per">{{ PS[i] if short else PL[i] }}</td><td class="frm">{{ fmt(verb, tense, i) }}</td></tr>
+  {% endfor %}
+  </table>
+</div>
+{%- endmacro %}
+
+{# perfecto = haber + participio, both read from the data #}
+{% macro perfecto_table(verb, compact=False, short=True, head=True) -%}
+<div class="tbl c-{{ cls(verb) }}{% if compact %} compact{% endif %}"{{ reg(verb) }}>
+  {% if head %}<div class="head"><span class="vb">{{ verb }}</span><span class="mean">{{ V[verb].fr }}</span></div>{% endif %}
+  <table>
+  {% for i in range(6) %}
+    <tr><td class="per">{{ PS[i] if short else PL[i] }}</td><td class="frm"><span class="pron">{{ V.haber.presente[i] }}</span> {{ nonfinite(verb, 'participio') }}</td></tr>
+  {% endfor %}
+  </table>
+</div>
+{%- endmacro %}
+
+{# ===================== boot diagram ===================== #}
+{% macro boot(verb, tense='presente', note=None) -%}
+<div class="bootcard c-{{ cls(verb) }}"{{ reg(verb) }}>
+  <div class="bh">{{ verb }}<span class="mean">{{ V[verb].fr }}</span></div>
+  <table class="boot">
+    <tr><td class="in bt bl br r-tl r-tr"><span class="p">yo</span>{{ fmt(verb, tense, 0) }}</td>
+        <td class="out"><span class="p">nosotros</span>{{ fmt(verb, tense, 3) }}</td></tr>
+    <tr><td class="in bl br"><span class="p">tú</span>{{ fmt(verb, tense, 1) }}</td>
+        <td class="out"><span class="p">vosotros</span>{{ fmt(verb, tense, 4) }}</td></tr>
+    <tr><td class="in bl bb r-bl"><span class="p">él / ella / usted</span>{{ fmt(verb, tense, 2) }}</td>
+        <td class="in bt br bb r-tr r-br"><span class="p">ellos / ustedes</span>{{ fmt(verb, tense, 5) }}</td></tr>
+  </table>
+  {% if V[verb].get('examples') %}<div class="bx">{{ stars(V[verb].examples[0].es) }} <span class="muted">· {{ V[verb].examples[0].fr }}</span></div>{% endif %}
+</div>
+{%- endmacro %}
+
+{# ===================== example list ===================== #}
+{% macro examples(items) -%}
+<ul class="ex-list">
+{% for s in items %}<li>{{ stars(s.es) }}<span class="tr">{{ s.fr }}{% if s.get('note') %} · <i>{{ s.note }}</i>{% endif %}</span></li>
+{% endfor %}
+</ul>
+{%- endmacro %}
+
+{# ===================== endings chart ===================== #}
+{% macro endings(tense, classes=('ar','er','ir'), base_label='stem') -%}
+<table class="data keep">
+  <thead><tr><th></th>{% for i in range(6) %}<th>{{ PS[i] }}</th>{% endfor %}</tr></thead>
+  <tbody>
+  {% for c in classes %}
+    <tr><td class="per"><span class="e-{{ c }}">-{{ c }}</span></td>{% for e in D.tenses[tense].endings[c] %}<td><span class="e-{{ c }}">-{{ e }}</span></td>{% endfor %}</tr>
+  {% endfor %}
+  </tbody>
+</table>
+{%- endmacro %}
+
+{# ===================== imperative table ===================== #}
+{% macro imp_table(verbs, neg=False) -%}
+<table class="data keep">
+  <thead><tr><th>verbe</th>{% for p in D.imperative_persons %}<th>{{ p.label }}</th>{% endfor %}</tr></thead>
+  <tbody>
+  {% for vb in verbs %}
+    <tr><td>{{ anchor(vb) }}<span class="es">{{ vb }}</span></td>
+    {% for p in IMP %}
+      <td>{% if neg %}<span class="pron">no</span> {{ fmt(vb, 'subj_presente', {'tu':1,'usted':2,'nosotros':3,'vosotros':4,'ustedes':5}[p]) }}{% else %}{{ fmt_plain(vb, 'imperativo', p) }}{% endif %}</td>
+    {% endfor %}</tr>
+  {% endfor %}
+  </tbody>
+</table>
+{%- endmacro %}
+
+{# ===================== exercises ===================== #}
+{% macro exercises(part) -%}
+{% set ns = namespace(n=0) %}
+{% for g in D.exercises[part] %}
+<div class="exgroup">
+  <h4>{{ g.title }}</h4>
+  <ol class="ex">
+  {% for it in g['items'] %}{% set ns.n = ns.n + 1 %}
+    <li><span class="n">{{ ns.n }}</span>{% if '___' in it.q %}{{ blank(it.q) }}{% else %}<span class="es">{{ it.q }}</span> <span class="arrow">→</span> <span class="blank"></span>{% endif %}</li>
+  {% endfor %}
+  </ol>
+</div>
+{% endfor %}
+{%- endmacro %}
+
+{% macro answers(part) -%}
+{% set ns = namespace(n=0) %}
+{% for g in D.exercises[part] %}
+<div class="grp"><div class="gt">{{ g.title }}</div><ol>
+{% for it in g['items'] %}{% set ns.n = ns.n + 1 %}<li><span class="n">{{ ns.n }}</span>{{ answer(it) }}</li>
+{% endfor %}</ol></div>
+{% endfor %}
+{%- endmacro %}

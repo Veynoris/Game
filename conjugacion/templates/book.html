@@ -1,0 +1,919 @@
+{% import "macros.html" as m with context %}
+{% macro sun(klass='sunmini') %}<svg class="{{ klass }}" viewBox="0 0 150 95">
+    {% for a in range(-75, 76, 15) %}
+      <line x1="75" y1="34" x2="75" y2="{{ 20 if a % 30 == 0 else 25 }}" stroke="{{ '#C65D3B' if a % 30 == 0 else '#E0AC2E' }}" stroke-width="2.6" stroke-linecap="round" transform="rotate({{ a }} 75 82)"/>
+    {% endfor %}
+    <path d="M33 82 A42 42 0 0 1 117 82 Z" fill="#F2C14E"/>
+    <path d="M45 82 A30 30 0 0 1 105 82 Z" fill="#F5CD6A"/>
+    <path d="M57 82 A18 18 0 0 1 93 82 Z" fill="#C65D3B" opacity="0.88"/>
+    <rect x="10" y="82" width="130" height="1.6" rx="0.8" fill="#2B2B2B"/>
+    <rect x="34" y="88" width="82" height="1.4" rx="0.7" fill="#7A8B5C"/>
+    <rect x="56" y="93" width="38" height="1.2" rx="0.6" fill="#5B7DB1"/>
+  </svg>{% endmacro %}
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>La Conjugaison Espagnole : le guide ultime de la conjugaison espagnole</title>
+<meta name="author" content="La Conjugaison Espagnole">
+<meta name="description" content="Les verbes espagnols, de zéro au subjonctif">
+<link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+
+{# ============================== COUVERTURE ============================== #}
+<section class="cover">
+  <svg class="tiles" viewBox="0 0 210 42" preserveAspectRatio="none">
+    {% set cols = ['#C65D3B', '#7A8B5C', '#F2C14E', '#5B7DB1'] %}
+    {% set softs = ['#F4DED4', '#E7EBDD', '#FBEBC4', '#DFE6F1'] %}
+    {% for j in range(2) %}{% for i in range(10) %}
+      {% set k = (i + j * 3) % 4 %}
+      <rect x="{{ i * 21 }}" y="{{ j * 21 }}" width="21" height="21" fill="{{ softs[k] }}"/>
+      {% if (i + j) % 2 == 0 %}
+        <circle cx="{{ i * 21 }}" cy="{{ j * 21 }}" r="10.5" fill="{{ cols[k] }}"/>
+        <circle cx="{{ i * 21 + 21 }}" cy="{{ j * 21 + 21 }}" r="10.5" fill="{{ cols[k] }}"/>
+      {% else %}
+        <circle cx="{{ i * 21 + 10.5 }}" cy="{{ j * 21 + 10.5 }}" r="6" fill="none" stroke="{{ cols[k] }}" stroke-width="2.2"/>
+        <circle cx="{{ i * 21 + 10.5 }}" cy="{{ j * 21 + 10.5 }}" r="1.8" fill="{{ cols[k] }}"/>
+      {% endif %}
+    {% endfor %}{% endfor %}
+    <rect x="0" y="40.8" width="210" height="1.2" fill="#2B2B2B" opacity="0.08"/>
+  </svg>
+  {{ sun('sun') }}
+  <div class="titlebox">
+    <div class="kicker">Le guide ultime de la conjugaison espagnole</div>
+    <h1>La Conjugaison <em>Espagnole</em></h1>
+    <div class="sub">Les verbes espagnols, de zéro au subjonctif</div>
+    <div class="tag">Expliqué en français · avec des repères tirés du français</div>
+  </div>
+  <div class="foot">
+    <div class="dots"><span style="background:#C65D3B"></span><span style="background:#7A8B5C"></span><span style="background:#5B7DB1"></span><span style="background:#F2C14E"></span></div>
+    <div style="margin-top:3mm">-ar · -er · -ir &nbsp;·&nbsp; radical + voyelle + marque de personne</div>
+  </div>
+</section>
+
+{# ============================== SOMMAIRE ============================== #}
+<section class="toc" style="break-before: page">
+  <h2>Sommaire</h2>
+  <div class="toc-cols">
+  {% for p in OUTLINE %}
+  <div class="part">
+    <a href="#{{ p.id }}"><span class="pn">{{ p.num }}</span>{{ p.title }}</a>
+    {% if p.sections %}
+    <ul>
+      {% for sid, t in p.sections %}<li><a href="#{{ sid }}"><span class="sn">{{ SN[sid] }}</span>{{ t }}</a></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+  {% endfor %}
+  </div>
+</section>
+
+{# ============================== MODE D'EMPLOI ============================== #}
+<section class="front" style="break-before: page; page: front">
+  <h2 class="sec" data-hdr="">Comment lire ce livre</h2>
+  <p class="lead">Étudie les parties dans l’ordre. La partie 0 est la plus importante : elle donne le système que suivent tous les tableaux du livre. La partie 6 sert à vérifier une forme.</p>
+
+  <h3>Les couleurs</h3>
+  <div class="keygrid">
+    <div class="keyitem"><span class="sw" style="background:#C65D3B"></span><b>Verbes en -ar</b> : terre cuite. habl<span class="e-ar">amos</span></div>
+    <div class="keyitem"><span class="sw" style="background:#7A8B5C"></span><b>Verbes en -er</b> : olive. com<span class="e-er">emos</span></div>
+    <div class="keyitem"><span class="sw" style="background:#5B7DB1"></span><b>Verbes en -ir</b> : bleu poudré. viv<span class="e-ir">imos</span></div>
+    <div class="keyitem"><span class="pill">mos</span> &nbsp;Les <b>marques de personne</b> sont toujours dans une pastille jaune.</div>
+    <div class="keyitem"><span class="stem irr">tuv</span><span class="end e-er">e</span> &nbsp;<b>Soulignement pointillé</b> : cette partie s’écarte du modèle régulier.</div>
+    <div class="keyitem"><span class="whole e-ir irr">ve</span> &nbsp;Une forme entièrement soulignée est irrégulière d’un bout à l’autre.</div>
+  </div>
+
+  <h3>Les encadrés</h3>
+  {% call m.callout('trick', 'Astuce') %}<p>Un raccourci ou un moyen mnémotechnique.</p>{% endcall %}
+  {% call m.callout('trap', 'Piège') %}<p>Là où le français (ou l’anglais) pousse vers une mauvaise forme espagnole.</p>{% endcall %}
+  {% call m.callout('pattern', 'Régularité') %}<p>Un schéma qui se répète d’un verbe ou d’un temps à l’autre.</p>{% endcall %}
+  {% call m.callout('practice', 'Entraînement') %}<p>De courts exercices à la fin de chaque partie. Les corrigés sont regroupés à la toute fin du livre.</p>{% endcall %}
+
+  <h3>Les personnes</h3>
+  <p>Les tableaux donnent toujours les six personnes dans cet ordre : <span class="es">yo</span> (je), <span class="es">tú</span> (tu), <span class="es">él / ella / usted</span> (il / elle / vous de politesse), <span class="es">nosotros</span> (nous), <span class="es">vosotros</span> (vous pluriel, en Espagne), <span class="es">ellos / ellas / ustedes</span> (ils / elles / vous pluriel de politesse ; en Amérique latine, <span class="es">ustedes</span> est le seul « vous » pluriel).</p>
+</section>
+
+{# ================================================================== #}
+{#                         PAGES DE PARTIE                             #}
+{# ================================================================== #}
+{% macro divider(p) %}
+<section class="divider" id="{{ p.id }}">
+  <div class="pm" data-part="{% if p.num %}Partie {{ p.num }} · {% endif %}{{ p.title }}"></div>
+  <svg class="deco" viewBox="0 0 72 297" preserveAspectRatio="xMaxYMid slice">
+    {% set cols = ['#C65D3B', '#7A8B5C', '#F2C14E', '#5B7DB1'] %}
+    {% set softs = ['#F4DED4', '#E7EBDD', '#FBEBC4', '#DFE6F1'] %}
+    {% for j in range(13) %}
+      {% set k = (j + (p.num|int if p.num else 0)) % 4 %}
+      <rect x="48" y="{{ j * 24 }}" width="24" height="24" fill="{{ softs[k] }}"/>
+      {% if j % 2 == 0 %}<circle cx="60" cy="{{ j * 24 + 12 }}" r="7" fill="none" stroke="{{ cols[k] }}" stroke-width="2.4"/><circle cx="60" cy="{{ j * 24 + 12 }}" r="2" fill="{{ cols[k] }}"/>
+      {% else %}<path d="M48 {{ j * 24 }} A12 12 0 0 1 60 {{ j * 24 + 12 }} A12 12 0 0 1 72 {{ j * 24 }} Z" fill="{{ cols[k] }}"/><path d="M48 {{ j * 24 + 24 }} A12 12 0 0 1 60 {{ j * 24 + 12 }} A12 12 0 0 1 72 {{ j * 24 + 24 }} Z" fill="{{ cols[k] }}" opacity="0.55"/>{% endif %}
+    {% endfor %}
+  </svg>
+  {% if p.num %}<div class="bignum">{{ p.num }}</div>{% else %}<div class="bignum">{{ sun() }}</div>{% endif %}
+  <div class="ttl">
+    <div class="kick">{% if p.num %}Partie {{ p.num }}{% else %}Solutions{% endif %}</div>
+    <h1>{{ p.title }}</h1>
+    {% if p.summary %}<div class="sum">{{ p.summary }}</div>{% endif %}
+    {% if p.sections %}<ul>{% for sid, t in p.sections %}<li><span class="n">{% if sid.startswith('ex-') %}{{ m.icon('practice') }}{% else %}{{ SN[sid] }}{% endif %}</span>{{ t }}</li>{% endfor %}</ul>{% endif %}
+  </div>
+</section>
+{% endmacro %}
+
+{# ================================================================== #}
+{#                              PARTIE 0                               #}
+{# ================================================================== #}
+{{ divider(OUTLINE[0]) }}
+
+{{ m.sec('s-formula') }}
+<p class="lead">L’espagnol semble avoir des centaines de formes verbales. En réalité, il a une poignée de petites pièces qui s’emboîtent. Apprends les pièces et tu sauras construire, et lire, presque toutes les formes.</p>
+
+{% set f = formula_check('hablar', 3) %}
+<div class="formula c-{{ f.cls }}">
+  <div class="row">
+    <span class="blk"><span class="box stem">{{ f.stem }}</span><span class="lab">radical</span></span><span class="op">+</span>
+    <span class="blk"><span class="box vow">{{ f.vowel }}</span><span class="lab">voyelle</span></span><span class="op">+</span>
+    <span class="blk"><span class="box mrk">{{ f.marker }}</span><span class="lab">marque de personne</span></span><span class="op">=</span>
+    <span class="blk"><span class="box res">{{ f.form }}</span><span class="lab">nous parlons</span></span>
+  </div>
+</div>
+
+<div class="steps">
+  <div class="step"><span class="sn">1</span><span class="st">Le radical</span><span class="sx">On enlève <b>-ar</b>, <b>-er</b> ou <b>-ir</b> à l’infinitif. Le radical porte le sens.<br>habl<span class="e-ar">ar</span> → <b>habl-</b><br>com<span class="e-er">er</span> → <b>com-</b><br>viv<span class="e-ir">ir</span> → <b>viv-</b></span></div>
+  <div class="step"><span class="sn">2</span><span class="st">La voyelle</span><span class="sx">Elle indique la famille du verbe.<br>verbes en <span class="e-ar">-ar</span> → <b class="e-ar">a</b><br>verbes en <span class="e-er">-er</span> et <span class="e-ir">-ir</span> → <b class="e-er">e</b><br><span class="muted">(au présent, les verbes en -ir prennent <b class="e-ir">i</b> à nosotros et vosotros : viv<span class="e-ir">imos</span>.)</span></span></div>
+  <div class="step"><span class="sn">3</span><span class="st">La marque de personne</span><span class="sx">Les dernières lettres disent <i>qui</i>. Ce sont les mêmes à presque tous les temps.<br><span class="pill">s</span> <span class="pill">mos</span> <span class="pill">is</span> <span class="pill">n</span></span></div>
+</div>
+
+<div class="formula small">
+  {% for vb, p in [('comer', 1), ('vivir', 5)] %}{% set f = formula_check(vb, p) %}
+  <div class="row c-{{ f.cls }}">
+    <span class="blk"><span class="box stem">{{ f.stem }}</span></span><span class="op">+</span>
+    <span class="blk"><span class="box vow">{{ f.vowel }}</span></span><span class="op">+</span>
+    <span class="blk"><span class="box mrk">{{ f.marker }}</span></span><span class="op">=</span>
+    <span class="blk"><span class="box res">{{ f.form }}</span></span>
+  </div>
+  {% endfor %}
+</div>
+
+<h3>Les marques de personne</h3>
+<table class="data keep">
+  <thead><tr><th>personne</th><th>marque</th><th>hablar</th><th>comer</th><th>vivir</th><th>repère français</th></tr></thead>
+  <tbody>
+  {% set hooks = [
+    'je parl<b>e</b> : la voyelle disparaît, <b>-o</b> prend sa place',
+    'tu parle<b>s</b> : le même <b>-s</b>',
+    'il parle : aucune marque',
+    'nous parl<b>ons</b> ≈ <b>-mos</b>',
+    'vous parl<b>ez</b> ≈ <b>-is</b>',
+    'ils parl<b>ent</b> ≈ <b>-n</b>, mais en espagnol le <b>n</b> se prononce'] %}
+  {% for pr in D.persons %}{% set i = loop.index0 %}
+    <tr>
+      <td class="per">{{ pr.label }}</td>
+      <td>{% if pr.marker %}<span class="pill">{{ pr.marker }}</span>{% else %}<span class="na">aucune</span>{% endif %}</td>
+      {% for vb in ['hablar', 'comer', 'vivir'] %}<td>{{ fmt(vb, 'presente', i) }}</td>{% endfor %}
+      <td class="small">{{ hooks[i]|safe }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<p class="note">À vosotros, la voyelle accentuée porte un accent écrit : habl<span class="e-ar">áis</span>, com<span class="e-er">éis</span>, viv<span class="e-ir">ís</span>.</p>
+
+{{ m.sec('s-markers') }}
+<p class="lead">Apprends <span class="pill">s</span> <span class="pill">mos</span> <span class="pill">is</span> <span class="pill">n</span> une seule fois. D’un temps à l’autre, seul le milieu du mot change ; la fin reste la même.</p>
+<table class="data keep">
+  <thead><tr><th>hablar</th>{% for i in range(6) %}<th>{{ PS[i] }}</th>{% endfor %}</tr></thead>
+  <tbody>
+  {% for t in ['presente', 'imperfecto', 'futuro', 'condicional', 'subj_presente', 'subj_imperfecto', 'indefinido'] %}
+    <tr><td class="per">{{ TS[t] }}</td>{% for i in range(6) %}<td>{{ marker('hablar', t, i) }}</td>{% endfor %}</tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<div class="two" style="margin-top:4mm">
+{% call m.callout('pattern', 'Régularité') %}
+<p><b>tú</b> finit par <b>-s</b>, <b>nosotros</b> par <b>-mos</b>, <b>vosotros</b> par <b>-is</b>, <b>ellos</b> par <b>-n</b> : à tous les temps de cette page, avec une seule exception (à droite).</p>
+<p><b>yo</b> et <b>él</b> n’ont pas de marque fixe ; elles changent avec le temps : hablo, hablaba, hablaré, hablé.</p>
+{% endcall %}
+{% call m.callout('trap', 'La seule exception') %}
+<p>Indefinido, <b>tú</b> : <span class="es mk-exc">hablaste</span>, <span class="es">comiste</span>, <span class="es">viviste</span>. Pas de <b>-s</b> final. N’en ajoute pas (<s>hablastes</s>).</p>
+<p>À l’imperfecto, au conditionnel et aux deux subjonctifs, <b>yo = él</b> : hablaba / hablaba. Le contexte, ou un pronom, lève l’ambiguïté.</p>
+{% endcall %}
+</div>
+
+{% call m.callout('trap', 'Piège : le « vous » de politesse') %}
+<p>Le <i>vous</i> de politesse pour une seule personne se dit <b>usted</b> et se conjugue comme <b>él</b> : <span class="es">¿Usted habla francés?</span> = <span class="fr">Vous parlez français ?</span> Pour plusieurs personnes (toujours en Amérique latine) : <b>ustedes</b> + la forme de <b>ellos</b> : <span class="es">¿Ustedes hablan francés?</span></p>
+{% endcall %}
+
+{{ m.sec('s-check') }}
+<p class="lead">Avant d’écrire un verbe, pose-toi trois questions rapides.</p>
+<div class="steps">
+  <div class="step"><span class="sn">1</span><span class="st">Trouve le sujet</span><span class="sx">Qui fait l’action ?<br><span class="es">Mis padres</span> ___ en Rabat. (vivir)</span></div>
+  <div class="step"><span class="sn">2</span><span class="st">Choisis la personne</span><span class="sx"><span class="es">Mis padres</span> = ils → <b>ellos</b></span></div>
+  <div class="step"><span class="sn">3</span><span class="st">Ajoute la marque</span><span class="sx">ellos → <span class="pill">n</span><br>viv + e + n = <b>{{ fmt('vivir', 'presente', 5) }}</b></span></div>
+</div>
+
+<h3>On laisse tomber le pronom</h3>
+<p>En général, l’espagnol n’exprime pas <span class="es">yo, tú, él…</span> : la terminaison dit déjà qui parle. <span class="es">Hablo español</span> est la façon normale de dire « je parle espagnol ». On n’ajoute le pronom que pour insister ou opposer : <span class="es">Yo hablo español, pero él no.</span></p>
+<div class="two">
+{% call m.callout('trick', 'Comme en arabe et en darija') %}
+<p>Tu connais déjà ce système : en arabe et en darija, <i>ktebt</i> veut dire « j’ai écrit » sans <i>ana</i>. La terminaison est le sujet. L’espagnol fonctionne de la même façon.</p>
+{% endcall %}
+{% call m.callout('pattern', 'Pourquoi le français a besoin de je, tu, il') %}
+<p>En français, <i>parle, parles, parlent</i> se prononcent pareil : c’est le pronom qui fait le travail. En espagnol, chaque terminaison s’entend (<span class="es">hablo, hablas, habla, hablan</span>) : le pronom est en trop.</p>
+{% endcall %}
+</div>
+
+<h3>Attention aux accents</h3>
+<p>Un accent écrit peut changer le mot. Ces paires comptent dès le premier jour :</p>
+<table class="data keep" style="max-width: 150mm">
+  <thead><tr><th>avec accent</th><th>sans accent</th><th>exemple</th></tr></thead>
+  <tbody>
+    <tr><td><b>tú</b> = tu, toi</td><td><b>tu</b> = ton, ta</td><td><span class="es">Tú tienes tu libro.</span> <span class="muted small">Tu as ton livre.</span></td></tr>
+    <tr><td><b>él</b> = il, lui</td><td><b>el</b> = le</td><td><span class="es">Él es el profesor.</span> <span class="muted small">C’est lui le professeur.</span></td></tr>
+    <tr><td><b>mí</b> = moi (après une préposition)</td><td><b>mi</b> = mon, ma</td><td><span class="es">A mí me gusta mi casa.</span> <span class="muted small">Moi, j’aime ma maison.</span></td></tr>
+  </tbody>
+</table>
+
+{{ m.sec('ex-part0') }}
+{% call m.callout('practice', 'Entraînement : partie 0') %}<p>Corrigés à la fin du livre.</p>{% endcall %}
+{{ m.exercises('part0') }}
+
+{# ================================================================== #}
+{#                              PARTIE 1                               #}
+{# ================================================================== #}
+{{ divider(OUTLINE[1]) }}
+
+{{ m.sec('s-pres-regular') }}
+<p class="lead">La plupart des verbes espagnols sont réguliers. Trois modèles suffisent : <span class="e-ar">hablar</span>, <span class="e-er">comer</span>, <span class="e-ir">vivir</span>. Le présent sert pour les faits, les habitudes, ce qui se passe maintenant, et aussi pour le futur proche : <span class="es">Mañana trabajo.</span> (Demain, je travaille.)</p>
+<div class="grid g3">
+  {% for vb in D.groups.models %}
+  <div>
+    {{ m.ctable(vb, 'presente', tag='-' ~ cls(vb)) }}
+    {{ m.examples(V[vb].examples) }}
+  </div>
+  {% endfor %}
+</div>
+<h4>Les terminaisons</h4>
+{{ m.endings('presente') }}
+{% call m.callout('pattern', 'Régularité') %}
+<p>Les verbes en <b>-er</b> et en <b>-ir</b> ne diffèrent qu’à <b>nosotros</b> et <b>vosotros</b> : com<span class="e-er">emos</span> / viv<span class="e-ir">imos</span>, com<span class="e-er">éis</span> / viv<span class="e-ir">ís</span>. Tout le reste est identique.</p>
+{% endcall %}
+
+{{ m.sec('s-boot') }}
+<p class="lead">Dans certains verbes, la voyelle du radical se dédouble quand elle est accentuée : <b>e → ie</b>, <b>o → ue</b>, <b>e → i</b>, <b>u → ue</b>. Les terminaisons restent régulières.</p>
+<p>Dessine une botte autour de <b>yo, tú, él</b> et <b>ellos</b> : dans la botte, le radical change. <b>Nosotros</b> et <b>vosotros</b> restent hors de la botte et gardent la voyelle de l’infinitif, parce que l’accent tonique tombe alors sur la terminaison. Comme en français : <span class="fr">je viens / nous venons</span>.</p>
+{% for g in D.groups.boot %}
+<h3>{{ g.change }}<span class="tag">{{ g.verbs|join(', ') }}</span></h3>
+<div class="grid g3">
+  {% for vb in g.verbs %}{{ m.boot(vb) }}{% endfor %}
+</div>
+{% endfor %}
+{% call m.callout('trick', 'Astuce') %}
+<p>Les bons dictionnaires signalent ces verbes : <i>pensar (ie)</i>, <i>dormir (ue)</i>, <i>pedir (i)</i>. <b>Jugar</b> est le seul verbe en u → ue.</p>
+{% endcall %}
+
+{{ m.sec('s-yo') }}
+<p class="lead">Ces verbes sont réguliers sauf à la forme <b>yo</b>. Apprends la forme yo et tu connais tout le présent.</p>
+<div style="margin-bottom:3mm">
+  <span class="chip">-go : hacer → hago · poner → pongo · salir → salgo · traer → traigo</span>
+  <span class="chip">-zco : conocer → conozco (aussi parecer, conducir, traducir)</span>
+  <span class="chip">autres : saber → sé · ver → veo · dar → doy</span>
+</div>
+<div class="grid g4">
+  {% for vb in D.groups.yo_irregular %}
+  <div>{{ m.ctable(vb, 'presente', compact=True, short=True) }}
+    <div class="note">{{ stars(V[vb].examples[0].es) }}<br>{{ V[vb].examples[0].fr }}</div>
+  </div>
+  {% endfor %}
+</div>
+{% call m.callout('pattern', 'Régularité') %}
+<p><span class="es">dais</span> et <span class="es">veis</span> n’ont pas d’accent : ce sont des mots d’une syllabe. <span class="es">sé</span> (je sais) en a un, pour le distinguer de <span class="es">se</span> (le pronom réfléchi).</p>
+{% endcall %}
+
+{{ m.sec('s-irregular') }}
+<p class="lead">Huit verbes que tu utiliseras tous les jours. Leurs formes ne suivent pas la formule : apprends chaque tableau par cœur.</p>
+<div class="grid g4">
+  {% for vb in D.groups.fully_irregular %}
+  <div>{{ m.ctable(vb, 'presente', compact=True, short=True) }}
+    <div class="note">{{ stars(V[vb].examples[0].es) }}<br>{{ V[vb].examples[0].fr }}</div>
+  </div>
+  {% endfor %}
+</div>
+<div class="two">
+{% call m.callout('pattern', 'Régularité') %}
+<p><b>tener, venir, decir</b> cumulent deux irrégularités : <b>-go</b> à yo et une botte : <span class="es">tengo / tienes</span>, <span class="es">vengo / vienes</span>, <span class="es">digo / dices</span>.</p>
+<p><b>oír</b> : <span class="es">oigo</span>, puis un <b>y</b> entre deux voyelles : <span class="es">oyes, oye, oyen</span>.</p>
+{% endcall %}
+{% call m.callout('trick', 'haber → hay') %}
+<p><b>hay</b> = il y a. Il ne change jamais : <span class="es">Hay un banco. Hay dos bancos.</span></p>
+<p>Les formes <span class="es">he, has, ha…</span> servent seulement à construire des temps : <span class="es">he comido</span> (partie 2).</p>
+{% endcall %}
+</div>
+
+{{ m.sec('s-reflexive') }}
+<p class="lead">Un verbe pronominal porte <b>-se</b> à l’infinitif : <span class="es">levantarse</span>. On conjugue le verbe normalement et on place devant le pronom qui correspond.</p>
+<table class="data keep" style="max-width:150mm">
+  <thead><tr>{% for i in range(6) %}<th>{{ PS[i] }}</th>{% endfor %}</tr></thead>
+  <tbody><tr>{% for pr in ['me', 'te', 'se', 'nos', 'os', 'se'] %}<td><b>{{ pr }}</b></td>{% endfor %}</tr></tbody>
+</table>
+<div class="grid g3" style="margin-top:4mm">
+  {% for vb in D.groups.reflexive %}
+  <div>{{ m.ctable(vb, 'presente', tag='-ar', short=True) }}{{ m.examples(V[vb].examples) }}</div>
+  {% endfor %}
+</div>
+<div class="two">
+{% call m.callout('trick', 'Comme en français') %}
+<p>Exactement comme en français : <span class="fr">je me lève</span> = <span class="es">me levanto</span>, <span class="fr">tu te lèves</span> = <span class="es">te levantas</span>, <span class="fr">nous nous levons</span> = <span class="es">nos levantamos</span>.</p>
+{% endcall %}
+{% call m.callout('pattern', 'Avec un infinitif') %}
+<p>Le pronom peut se placer devant, ou s’accrocher à l’infinitif : <span class="es">Me voy a duchar</span> = <span class="es">Voy a ducharme</span>. Les deux sont corrects.</p>
+{% endcall %}
+</div>
+
+{{ m.sec('s-gustar') }}
+<p class="lead">Avec <b>gustar</b>, la chose aimée est le sujet. <span class="es">Me gusta el café</span> veut dire littéralement « le café me plaît ». Le verbe s’accorde donc avec la <i>chose</i>, pas avec la personne.</p>
+<div class="formula small">
+  <div class="row c-ar"><span class="blk"><span class="box stem">me</span><span class="lab">à qui</span></span><span class="op">+</span><span class="blk"><span class="box vow">{{ V.gustar.presente[2] }}</span><span class="lab">une chose / un verbe</span></span><span class="op">+</span><span class="blk"><span class="box res">el café · bailar</span></span></div>
+  <div class="row c-ar"><span class="blk"><span class="box stem">me</span><span class="lab">à qui</span></span><span class="op">+</span><span class="blk"><span class="box vow">{{ V.gustar.presente[5] }}</span><span class="lab">plusieurs choses</span></span><span class="op">+</span><span class="blk"><span class="box res">los libros</span></span></div>
+</div>
+<div class="two">
+  <table class="data keep">
+    <thead><tr><th>insistance (facultatif)</th><th>pronom</th><th>sens</th></tr></thead>
+    <tbody>{% for g in D.gustar_pronouns %}<tr><td class="small">{{ g.stress }}</td><td><b>{{ g.pron }}</b></td><td class="small muted">{{ g.fr }}</td></tr>{% endfor %}</tbody>
+  </table>
+  <table class="data keep">
+    <thead><tr><th>verbe</th><th>sens</th><th>+ une chose</th><th>+ plusieurs</th></tr></thead>
+    <tbody>{% for g in D.gustar_type %}<tr><td><b>{{ g.verb }}</b></td><td class="small">{{ g.fr }}</td><td><span class="e-{{ cls(g.verb) }}">{{ g.sg }}</span></td><td><span class="e-{{ cls(g.verb) }}">{{ g.pl }}</span></td></tr>{% endfor %}</tbody>
+  </table>
+</div>
+<div class="cols2">{{ m.examples(D.sentences.gustar) }}</div>
+<div class="two">
+{% call m.callout('trick', 'Pense à « plaire »') %}
+<p><span class="fr">le café me plaît</span> = <span class="es">me gusta el café</span> ; <span class="fr">les livres me plaisent</span> = <span class="es">me gustan los libros</span>. Même construction, même accord.</p>
+{% endcall %}
+{% call m.callout('trap', 'Piège') %}
+<p>À la 3ᵉ personne, c’est <b>le / les</b>, jamais <i>se</i> : <span class="es">A Ana le gusta…</span> <span class="es">A mis padres les gusta…</span> Et <span class="es">a mí</span> prend un accent.</p>
+{% endcall %}
+</div>
+
+{{ m.sec('s-serestar') }}
+<p class="lead">Le français a un seul verbe, <span class="fr">être</span> ; l’espagnol le coupe en deux. <b>Ser</b> dit <i>ce qu’est</i> une chose. <b>Estar</b> dit <i>où</i> elle est et <i>comment</i> elle est en ce moment.</p>
+<div class="two">
+  <div class="tbl c-ar"><div class="head"><span class="vb">ser</span><span class="mean">ce que c’est</span></div>
+    <table>
+      <tr><td class="per">identité, profession</td><td class="frm">Soy profesora.</td></tr>
+      <tr><td class="per">origine, nationalité</td><td class="frm">Es de Tánger. Es marroquí.</td></tr>
+      <tr><td class="per">caractère, description</td><td class="frm">Es simpático.</td></tr>
+      <tr><td class="per">heure, date</td><td class="frm">Son las cinco. Es lunes.</td></tr>
+      <tr><td class="per">lieu d’un événement</td><td class="frm">La fiesta es en mi casa.</td></tr>
+    </table></div>
+  <div class="tbl c-er"><div class="head"><span class="vb">estar</span><span class="mean">où / comment c’est</span></div>
+    <table>
+      <tr><td class="per">lieu, position</td><td class="frm">Sevilla está en Andalucía.</td></tr>
+      <tr><td class="per">état passager, humeur</td><td class="frm">Hoy estoy cansado.</td></tr>
+      <tr><td class="per">résultat d’un changement</td><td class="frm">La sopa está fría.</td></tr>
+      <tr><td class="per">action en cours</td><td class="frm">Estamos comiendo.</td></tr>
+      <tr><td class="per">salutation</td><td class="frm">¿Cómo estás?</td></tr>
+    </table></div>
+</div>
+<div class="two">
+  {{ m.examples(D.sentences.ser) }}
+  {{ m.examples(D.sentences.estar) }}
+</div>
+{% call m.callout('pattern', 'Même adjectif, sens différent') %}
+<p><span class="es">ser listo</span> = être intelligent · <span class="es">estar listo</span> = être prêt &nbsp;·&nbsp; <span class="es">ser aburrido</span> = être ennuyeux · <span class="es">estar aburrido</span> = s’ennuyer</p>
+{% endcall %}
+
+{{ m.sec('s-mistakes', start=False) }}
+{% call m.callout('trap', 'Erreurs fréquentes des francophones') %}
+<table class="data" style="background:transparent">
+  <thead><tr><th>✗ faux</th><th>✓ juste</th><th>pourquoi</th></tr></thead>
+  <tbody>
+    <tr><td><s>Él estoy cansado.</s></td><td><b>Él está cansado.</b></td><td class="small">La terminaison suit le sujet : él n’a pas de marque → <i>está</i>.</td></tr>
+    <tr><td><s>Es un médico.</s></td><td><b>Es médico.</b></td><td class="small">Pas d’article devant une profession, comme dans <i>il est médecin</i>.</td></tr>
+    <tr><td><s>Me gusta los libros.</s></td><td><b>Me gustan los libros.</b></td><td class="small">Le verbe s’accorde avec les choses aimées.</td></tr>
+    <tr><td><s>Estoy médico.</s></td><td><b>Soy médico.</b></td><td class="small"><i>Je suis</i> = deux verbes en espagnol ; une profession prend <i>ser</i>.</td></tr>
+    <tr><td><s>¿Habláis francés?</s> <span class="small">(à ton professeur)</span></td><td><b>¿Habla usted francés?</b></td><td class="small">Le <i>vous</i> de politesse pour une personne = usted + forme de él.</td></tr>
+    <tr><td><s>Juego el piano.</s></td><td><b>Toco el piano.</b></td><td class="small"><i>Jouer</i> à un jeu ou un sport = <i>jugar</i> ; d’un instrument = <i>tocar</i>.</td></tr>
+  </tbody>
+</table>
+{% endcall %}
+
+{{ m.sec('ex-part1') }}
+{% call m.callout('practice', 'Entraînement : partie 1') %}<p>Corrigés à la fin du livre.</p>{% endcall %}
+{{ m.exercises('part1') }}
+
+{# ================================================================== #}
+{#                              PARTIE 2                               #}
+{# ================================================================== #}
+{{ divider(OUTLINE[2]) }}
+
+{{ m.sec('s-perfecto') }}
+<p class="lead"><b>haber</b> au présent + le participe passé. C’est le passé composé espagnol, employé pour une période qui n’est pas terminée : <i>hoy, esta semana, este año, alguna vez, ya, todavía no</i>.</p>
+<div class="grid g3">
+  <div>{{ m.ctable('haber', 'presente') }}</div>
+  <div>
+    <h4 style="margin-top:0">Le participe</h4>
+    <table class="data">
+      <tbody>
+      {% for vb in D.groups.models %}<tr><td>{{ vb }}</td><td>{{ nonfinite(vb, 'participio') }}</td></tr>{% endfor %}
+      </tbody>
+    </table>
+    <p class="note">-ar → <b class="e-ar">-ado</b> · -er / -ir → <b class="e-er">-ido</b></p>
+  </div>
+  <div>{{ m.perfecto_table('hablar', short=True) }}</div>
+</div>
+<div class="two">
+  <div>
+    <h4 style="margin-top:0">Participes irréguliers</h4>
+    <table class="data keep">
+      <tbody>{% for x in D.irregular_participles %}<tr><td>{{ x.verb }}</td><td><span class="whole e-{{ cls(x.verb) }} irr">{{ x.participle }}</span></td><td class="small muted">{{ x.fr }}</td></tr>{% endfor %}</tbody>
+    </table>
+  </div>
+  <div>
+    <h4 style="margin-top:0">Exemples</h4>
+    {{ m.examples(D.sentences.perfecto) }}
+    {% call m.callout('trap', 'Piège : toujours haber') %}
+    <p>L’espagnol n’emploie jamais <i>ser</i> ni <i>estar</i> ici : <span class="fr">je suis allé</span> = <span class="es">he ido</span> ; <span class="fr">je me suis levée</span> = <span class="es">me he levantado</span>. Le participe ne s’accorde jamais : <span class="es">ella ha ido</span> (<span class="fr">elle est allée</span>).</p>
+    {% endcall %}
+  </div>
+</div>
+<p class="note">Rien ne se place entre haber et le participe : <span class="es">Ya lo he hecho</span>, pas <s>He ya hecho</s>. Dans la plupart des pays d’Amérique latine, on préfère l’indefinido même pour aujourd’hui : <span class="es">Hoy comí cuscús.</span></p>
+
+{{ m.sec('s-indefinido') }}
+<p class="lead">Une action terminée, à un moment du passé lui aussi terminé : <i>ayer, anoche, el año pasado, en 2019, hace dos días</i>.</p>
+<div class="grid g3">
+  {% for vb in D.groups.models %}<div>{{ m.ctable(vb, 'indefinido', tag='-' ~ cls(vb)) }}</div>{% endfor %}
+</div>
+<h4>Les terminaisons</h4>
+{{ m.endings('indefinido') }}
+<div class="two" style="margin-top:3mm">
+{% call m.callout('pattern', 'Régularité') %}
+<p>L’accent porte sur les terminaisons de <b>yo</b> et <b>él</b> : habl<span class="e-ar">é</span>, habl<span class="e-ar">ó</span>, com<span class="e-er">í</span>, viv<span class="e-ir">ió</span>. Sans accent, <span class="es">hablo</span> est un présent !</p>
+<p>Pour les verbes en -ar et en -ir, <b>nosotros</b> est identique au présent (<span class="es">hablamos, vivimos</span>) : c’est le contexte qui tranche.</p>
+{% endcall %}
+{% call m.callout('trick', 'Orthographe, pas irrégularité') %}
+<p>À <b>yo</b>, -car → <b>-qué</b>, -gar → <b>-gué</b>, -zar → <b>-cé</b> pour garder le son : <span class="es">buscar → busqué</span>, <span class="es">jugar → {{ fmt('jugar', 'indefinido', 0) }}</span>, <span class="es">empezar → {{ fmt('empezar', 'indefinido', 0) }}</span>.</p>
+{% endcall %}
+</div>
+{{ m.examples(D.sentences.indefinido) }}
+
+{{ m.sec('s-indef-irr') }}
+<p class="lead">Les verbes les plus courants ont un radical spécial à l’indefinido et partagent une seule série de terminaisons, <b>sans accent</b>.</p>
+<div class="two">
+  <table class="data keep">
+    <thead><tr><th>verbe</th><th>radical</th><th>yo</th><th>él</th><th>ellos</th></tr></thead>
+    <tbody>
+    {% for x in D.strong_preterite_stems if x.verb != 'saber' and x.verb != 'haber' %}
+      <tr><td>{{ anchor(x.verb) }}{{ x.verb }}</td><td><b class="irr">{{ x.stem }}-</b></td><td>{{ fmt(x.verb, 'indefinido', 0) }}</td><td>{{ fmt(x.verb, 'indefinido', 2) }}</td><td>{{ fmt(x.verb, 'indefinido', 5) }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <div>
+    <h4 style="margin-top:0">Terminaisons de ces radicaux</h4>
+    <table class="data keep">
+      <thead><tr>{% for i in range(6) %}<th>{{ PS[i] }}</th>{% endfor %}</tr></thead>
+      <tbody><tr>{% for e in D.strong_preterite_endings %}<td><b>-{{ e }}</b></td>{% endfor %}</tr></tbody>
+    </table>
+    {% call m.callout('pattern', 'Régularité') %}
+    <ul>
+      <li>Aucun accent : <span class="es">tuve, tuvo</span> (pas <s>tuvé</s>).</li>
+      <li>Les radicaux en <b>j</b> perdent le i : <span class="es">{{ V.decir.indefinido[5] }}, {{ V.traer.indefinido[5] }}</span>.</li>
+      <li><span class="es">hacer → {{ V.hacer.indefinido[2] }}</span> : le c devient z pour garder le son.</li>
+      <li>Aussi : <span class="es">saber → sup-</span> (supe), <span class="es">haber → hub-</span> (hubo).</li>
+    </ul>
+    {% endcall %}
+  </div>
+</div>
+<div class="grid g4">
+  <div>{{ m.ctable('ser', 'indefinido', compact=True, short=True, title='ser = ir') }}<div class="note">Mêmes formes : <span class="es">fui</span> = je fus / j’allai. Le contexte décide.</div></div>
+  <div>{{ m.ctable('dar', 'indefinido', compact=True, short=True) }}<div class="note">Verbe en -ar avec les terminaisons de -er/-ir, sans accent.</div></div>
+  <div>{{ m.ctable('pedir', 'indefinido', compact=True, short=True) }}</div>
+  <div>{{ m.ctable('dormir', 'indefinido', compact=True, short=True) }}</div>
+</div>
+{% call m.callout('pattern', 'Les verbes « botte » à l’indefinido') %}
+<p>Seuls les verbes « botte » en <b>-ir</b> changent, et seulement à <b>él</b> et <b>ellos</b> : e → i (<span class="es">{{ V.pedir.indefinido[2] }}, {{ V.sentir.indefinido[2] }}</span>), o → u (<span class="es">{{ V.dormir.indefinido[2] }}, {{ V.dormir.indefinido[5] }}</span>). Les verbes « botte » en -ar et en -er sont réguliers ici : <span class="es">{{ V.pensar.indefinido[0] }}, {{ V.volver.indefinido[0] }}</span>.</p>
+{% endcall %}
+
+{{ m.sec('s-imperfecto') }}
+<p class="lead">Le décor, la description et les habitudes : ce qui <i>se passait</i>, ce qui <i>avait lieu d’habitude</i>. ≈ l’imparfait français (<span class="fr">je parlais</span> = <span class="es">hablaba</span>).</p>
+<div class="grid g3">
+  {% for vb in D.groups.models %}<div>{{ m.ctable(vb, 'imperfecto', tag='-' ~ cls(vb)) }}</div>{% endfor %}
+</div>
+<h4>Seulement trois verbes irréguliers</h4>
+<div class="grid g3">
+  {% for vb in D.groups.imperfect_irregular %}<div>{{ m.ctable(vb, 'imperfecto', compact=True) }}</div>{% endfor %}
+</div>
+<div class="two">
+{% call m.callout('pattern', 'Régularité') %}
+<p>-er et -ir partagent une seule série : <span class="es">comía, vivía</span>. <b>yo = él</b> : <span class="es">(yo) hablaba</span>, <span class="es">(ella) hablaba</span>.</p>
+<p><b>nosotros</b> porte un accent : <span class="es">{{ V.hablar.imperfecto[3] }}, {{ V.comer.imperfecto[3] }}, {{ V.ir.imperfecto[3] }}, {{ V.ser.imperfecto[3] }}</span>.</p>
+{% endcall %}
+<div>{{ m.examples(D.sentences.imperfecto) }}</div>
+</div>
+
+{{ m.sec('s-contrast') }}
+<p class="lead">L’<b>imperfecto</b> peint le décor ; l’<b>indefinido</b> raconte ce qui s’y est passé.</p>
+<div class="timeline">
+<svg viewBox="0 0 520 150">
+  <rect x="20" y="58" width="480" height="30" rx="15" fill="#E7EBDD"/>
+  <path d="M30 73 Q 60 61 90 73 T 150 73 T 210 73 T 270 73 T 330 73 T 390 73 T 450 73 T 490 73" fill="none" stroke="#7A8B5C" stroke-width="2.4"/>
+  {% for x in [250, 330, 410] %}
+  <line x1="{{ x }}" y1="26" x2="{{ x }}" y2="64" stroke="#C65D3B" stroke-width="2.2"/>
+  <circle cx="{{ x }}" cy="73" r="8" fill="#C65D3B"/>
+  {% endfor %}
+  <path d="M20 128 H 300" stroke="#B8AFA3" stroke-width="1"/><path d="M300 128 l-6 -3.5 v7 z" fill="#B8AFA3"/>
+</svg>
+  <span class="tl tl-k" style="left:5%; top:22%">imperfecto · le décor</span>
+  <span class="tl" style="left:5%; top:65%"><b class="tl-o">{{ V.ser.imperfecto[2]|capitalize }}</b> tarde y <b class="tl-o">llovía</b>… yo <b class="tl-o">{{ V.estudiar.imperfecto[0] }}</b>…</span>
+  {% for x, w in [(250, 'sonó'), (330, 'llegó'), (410, V.ir.indefinido[3])] %}
+  <span class="tl tl-e" style="left:{{ (x / 520 * 100)|round(2) }}%; top:2%">{{ w }}</span>
+  {% endfor %}
+  <span class="tl tl-k tl-r" style="right:4%; top:84%">indefinido · les événements</span>
+  <span class="tl tl-t" style="left:4%; top:88%">temps</span>
+</div>
+<div class="two">
+  <div class="tbl c-er"><div class="head"><span class="vb">imperfecto</span><span class="mean">le décor</span></div>
+    <table>
+      <tr><td class="per">description</td><td class="frm">Era tarde. Hacía sol.</td></tr>
+      <tr><td class="per">habitudes</td><td class="frm">Siempre comíamos juntos.</td></tr>
+      <tr><td class="per">action en cours</td><td class="frm">Estudiaba cuando…</td></tr>
+      <tr><td class="per">âge, heure</td><td class="frm">Tenía diez años. Eran las tres.</td></tr>
+      <tr><td class="per">mots repères</td><td class="frm small">siempre, antes, cada día, normalmente, de niño</td></tr>
+    </table></div>
+  <div class="tbl c-ar"><div class="head"><span class="vb">indefinido</span><span class="mean">les événements</span></div>
+    <table>
+      <tr><td class="per">action terminée</td><td class="frm">Ayer comí con Ana.</td></tr>
+      <tr><td class="per">suite d’actions</td><td class="frm">Llegué, cené y salí.</td></tr>
+      <tr><td class="per">période close</td><td class="frm">Viví tres años en Madrid.</td></tr>
+      <tr><td class="per">interruption</td><td class="frm">…sonó el teléfono.</td></tr>
+      <tr><td class="per">mots repères</td><td class="frm small">ayer, anoche, el lunes, en 2019, de repente</td></tr>
+    </table></div>
+</div>
+{{ m.examples(D.sentences.contrast) }}
+{% call m.callout('trick', 'Comme en français') %}
+<p>Même logique qu’en français : <span class="fr">imparfait</span> = <b>imperfecto</b> ; <span class="fr">passé composé</span> (à l’oral) ou <span class="fr">passé simple</span> (à l’écrit) = <b>indefinido</b>. <span class="fr">Il pleuvait quand je suis arrivé</span> = <span class="es">Llovía cuando llegué.</span></p>
+{% endcall %}
+
+{{ m.sec('ex-part2') }}
+{% call m.callout('practice', 'Entraînement : partie 2') %}<p>Corrigés à la fin du livre.</p>{% endcall %}
+{{ m.exercises('part2') }}
+
+{# ================================================================== #}
+{#                              PARTIE 3                               #}
+{# ================================================================== #}
+{{ divider(OUTLINE[3]) }}
+
+{{ m.sec('s-ira') }}
+<p class="lead">Le futur le plus simple : <b>ir</b> au présent + <b>a</b> + infinitif. C’est la façon courante de parler de ses projets.</p>
+<div class="two">
+  <div class="tbl c-ir"{{ reg('ir') }}><div class="head"><span class="vb">ir a</span><span class="mean">+ infinitif</span></div>
+    <table>{% for i in range(6) %}<tr><td class="per">{{ PL[i] }}</td><td class="frm">{{ fmt('ir', 'presente', i) }} <b>a</b> <span class="muted">comer</span></td></tr>{% endfor %}</table>
+  </div>
+  <div>
+    {{ m.examples(D.sentences.ir_a) }}
+    {% call m.callout('trap', 'Piège') %}
+    <p>Comme <span class="fr">je vais manger</span>, mais l’espagnol exige <b>a</b> : <span class="es">Voy a comer</span>, jamais <s>Voy comer</s>.</p>
+    {% endcall %}
+  </div>
+</div>
+
+{{ m.sec('s-futuro', start=False) }}
+<p class="lead">On ajoute les terminaisons à <b>l’infinitif entier</b>. Une seule série pour les trois familles.</p>
+<div class="grid g3">
+  {% for vb in D.groups.models %}<div>{{ m.ctable(vb, 'futuro', tag='-' ~ cls(vb)) }}</div>{% endfor %}
+</div>
+{% call m.callout('trick', 'Comme en français') %}
+<p>Le français le construit de la même façon : <span class="fr">parler-ai, parler-as, parler-a</span> → <span class="es">hablar-é, hablar-ás, hablar-á</span>. Toutes les terminaisons ont un accent, sauf <b>-emos</b>.</p>
+{% endcall %}
+<div class="keep">
+<h3>Les 12 radicaux irréguliers</h3>
+<p>Seul le radical change ; les terminaisons sont les terminaisons régulières. Le conditionnel utilise les mêmes radicaux.</p>
+<table class="data">
+  <thead><tr><th>type</th><th>verbe</th><th>radical</th><th>futuro (yo)</th><th>condicional (yo)</th></tr></thead>
+  <tbody>
+  {% set types = {'poder':'la voyelle tombe', 'saber':'la voyelle tombe', 'haber':'la voyelle tombe', 'querer':'la voyelle tombe', 'caber':'la voyelle tombe',
+                  'tener':'un d remplace la voyelle', 'poner':'un d remplace la voyelle', 'salir':'un d remplace la voyelle', 'venir':'un d remplace la voyelle', 'valer':'un d remplace la voyelle',
+                  'decir':'radical court', 'hacer':'radical court'} %}
+  {% for kind in ['la voyelle tombe', 'un d remplace la voyelle', 'radical court'] %}
+    {% for x in D.future_stems if types[x.verb] == kind %}
+    <tr><td class="per">{% if loop.first %}{{ kind }}{% endif %}</td><td>{{ anchor(x.verb) }}{{ x.verb }} <span class="muted small">{{ V[x.verb].fr }}</span></td><td><b class="irr">{{ x.stem }}-</b></td><td>{{ fmt(x.verb, 'futuro', 0) }}</td><td>{{ fmt(x.verb, 'condicional', 0) }}</td></tr>
+    {% endfor %}
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+<div class="two" style="margin-top:3mm">
+  {{ m.examples(D.sentences.futuro) }}
+  {% call m.callout('pattern', 'Emplois') %}
+  <p>Prédictions et promesses : <span class="es">Mañana hablaré con él.</span> Aussi une supposition sur le présent : <span class="es">¿Dónde estará Ana?</span> = Où peut bien être Ana ?</p>
+  {% endcall %}
+</div>
+
+{{ m.sec('s-condicional') }}
+<p class="lead">Même base que le futur (l’infinitif, ou l’un des 12 radicaux) + les terminaisons en <b>-ía</b>. Ce sont celles de l’imperfecto des verbes en -er.</p>
+<div class="grid g3">
+  {% for vb in D.groups.models %}<div>{{ m.ctable(vb, 'condicional', tag='-' ~ cls(vb)) }}</div>{% endfor %}
+</div>
+<div class="grid g4">
+  {% for vb in ['tener', 'poder', 'decir', 'hacer'] %}<div>{{ m.ctable(vb, 'condicional', compact=True, short=True) }}</div>{% endfor %}
+</div>
+<div class="two">
+{% call m.callout('trick', 'Comme en français') %}
+<p><span class="fr">parler-ais</span> = <span class="es">hablar-ía</span> ; <span class="fr">je pourrais</span> = <span class="es">podría</span>. Même construction, mêmes emplois.</p>
+{% endcall %}
+{% call m.callout('pattern', 'Emplois') %}
+<ul>
+<li>Demandes polies : <span class="es">¿Podrías ayudarme?</span></li>
+<li>Souhaits : <span class="es">Me gustaría viajar.</span></li>
+<li>Conseils : <span class="es">Yo que tú, hablaría con ella.</span></li>
+<li>Avec <b>si</b> + subjonctif imparfait (partie 5) : <span class="es">Si tuviera tiempo, viajaría.</span></li>
+</ul>
+{% endcall %}
+</div>
+{{ m.examples(D.sentences.condicional) }}
+
+{{ m.sec('ex-part3') }}
+{% call m.callout('practice', 'Entraînement : partie 3') %}<p>Corrigés à la fin du livre.</p>{% endcall %}
+{{ m.exercises('part3') }}
+
+{# ================================================================== #}
+{#                              PARTIE 4                               #}
+{# ================================================================== #}
+{{ divider(OUTLINE[4]) }}
+
+{{ m.sec('s-imp-aff') }}
+<p class="lead">L’impératif de <b>tú</b> est une forme que tu connais déjà : la forme de <b>él</b> au présent. <span class="es">Habla.</span> <span class="es">Come.</span> <span class="es">Vive.</span></p>
+<table class="data keep">
+  <thead><tr><th>personne</th><th>comment le former</th><th>hablar</th><th>comer</th><th>vivir</th></tr></thead>
+  <tbody>
+    {% set howto = {'tu': 'présent, forme de él', 'usted': 'subjonctif présent', 'nosotros': 'subjonctif présent (= « -ons ! »)', 'vosotros': 'infinitif : -r → -d', 'ustedes': 'subjonctif présent'} %}
+    {% for p in D.imperative_persons %}
+    <tr><td class="per">{{ p.label }}</td><td class="small">{{ howto[p.key] }}</td>{% for vb in D.groups.models %}<td>{{ fmt_plain(vb, 'imperativo', p.key) }}</td>{% endfor %}</tr>
+    {% endfor %}
+  </tbody>
+</table>
+<h3>Huit impératifs irréguliers à tú</h3>
+<div class="grid g4" style="grid-template-columns: repeat(8, 1fr); gap: 2.4mm">
+  {% for vb in D.groups.imperative_irregular %}
+  <div class="tbl c-{{ cls(vb) }}" style="text-align:center">{{ anchor(vb) }}<div class="head" style="padding:1.4mm 1mm"><span class="vb" style="font-size:10pt">{{ vb }}</span></div>
+    <div style="padding:2mm 0 2.4mm; font-size:15pt">{{ fmt_plain(vb, 'imperativo', 'tu') }}</div></div>
+  {% endfor %}
+</div>
+<div class="two">
+{% call m.callout('trick', 'Astuce') %}
+<p>Récite-les comme une comptine : <b>di, haz, ve, pon, sal, sé, ten, ven</b>. Tous ont une seule syllabe.</p>
+{% endcall %}
+{% call m.callout('pattern', 'Attention') %}
+<p><span class="es">ve</span> = va (ir) <i>et</i> vois (ver). <span class="es">sé</span> = sois (ser) <i>et</i> je sais (saber). Le contexte décide. « Allons-y » se dit <span class="es">{{ V.ir.imperativo[2] }}</span> (ou <span class="es">vámonos</span>), pas <s>vayamos</s>.</p>
+{% endcall %}
+</div>
+{{ m.imp_table(['tener', 'hacer', 'ir', 'ser', 'dar', 'saber']) }}
+
+{{ m.sec('s-imp-neg') }}
+<p class="lead">L’impératif négatif est simple : <b>no + subjonctif présent</b>, à toutes les personnes, même tú et vosotros.</p>
+{{ m.imp_table(['hablar', 'comer', 'vivir', 'hacer', 'ir', 'decir'], neg=True) }}
+{% call m.callout('trap', 'Piège') %}
+<p>Ne mets pas <i>no</i> devant la forme affirmative : <s>No habla</s> → <b>No hables</b>. <s>No ven</s> → <b>No vengas</b>. La partie 5 explique comment se forme le subjonctif.</p>
+{% endcall %}
+<h4>Exemples</h4>
+<div class="cols2">{{ m.examples(D.sentences.imperativo) }}</div>
+
+{{ m.sec('s-imp-pron') }}
+<div class="two">
+  <div>
+    <h4 style="margin-top:0">Affirmatif : à la fin du verbe</h4>
+    <p>À l’impératif affirmatif, les pronoms compléments et réfléchis s’accrochent à la fin du verbe, comme en français (<span class="fr">lève-toi</span>). On ajoute un accent écrit pour garder l’accent tonique à sa place : <span class="es">levanta + te → levántate</span>, <span class="es">come + lo → cómelo</span>. Un impératif d’une syllabe avec un seul pronom n’en a pas besoin : <span class="es">hazlo, dime, ponte</span>.</p>
+    <h4>Négatif : devant le verbe</h4>
+    <p>Avec <i>no</i>, les pronoms se placent avant le verbe, comme dans une phrase normale : <span class="es">No te levantes. No lo comas.</span></p>
+    <h4>Deux petits changements</h4>
+    <ul class="clean small">
+      <li>vosotros perd le <b>-d</b> devant <b>os</b> : <span class="es">levantad + os → levantaos</span></li>
+      <li>nosotros perd le <b>-s</b> devant <b>nos</b> : <span class="es">levantemos + nos → levantémonos</span></li>
+    </ul>
+  </div>
+  <div>{{ m.examples(D.sentences.pronouns) }}</div>
+</div>
+
+{{ m.sec('ex-part4') }}
+{% call m.callout('practice', 'Entraînement : partie 4') %}<p>Corrigés à la fin du livre.</p>{% endcall %}
+{{ m.exercises('part4') }}
+
+{# ================================================================== #}
+{#                              PARTIE 5                               #}
+{# ================================================================== #}
+{{ divider(OUTLINE[5]) }}
+
+{{ m.sec('s-subj-pres') }}
+<p class="lead">Le subjonctif apparaît après l’expression d’un souhait, d’un sentiment, d’un doute ou d’un but : <span class="es">Quiero que vengas.</span> On le construit en deux étapes.</p>
+<div class="steps" style="grid-template-columns: 1fr 1fr">
+  <div class="step"><span class="sn">1</span><span class="st">Pars de yo</span><span class="sx">Prends la forme <b>yo</b> du présent et enlève le <b>-o</b>.<br><span class="es">hablo → habl-</span> · <span class="es">tengo → teng-</span> · <span class="es">conozco → conozc-</span></span></div>
+  <div class="step"><span class="sn">2</span><span class="st">Prends la voyelle opposée</span><span class="sx">Les verbes en <span class="e-ar">-ar</span> prennent <b class="e-er">e</b> ; ceux en <span class="e-er">-er</span> et <span class="e-ir">-ir</span> prennent <b class="e-ar">a</b>. Les marques ne changent pas.</span></div>
+</div>
+<div class="formula small">
+  {% for vb in ['hablar', 'comer', 'tener'] %}
+  <div class="row c-{{ 'er' if cls(vb) == 'ar' else 'ar' }}">
+    <span class="blk"><span class="box stem">{{ V[vb].presente[0] }}</span></span><span class="op">→</span>
+    <span class="blk"><span class="box stem">{{ V[vb].presente[0][:-1] }}</span></span><span class="op">+</span>
+    <span class="blk"><span class="box vow">{{ V[vb].subj_presente[0][-1] }}</span></span><span class="op">=</span>
+    <span class="blk"><span class="box res">{{ V[vb].subj_presente[0] }}</span></span>
+  </div>
+  {% endfor %}
+</div>
+<div class="grid g3">
+  {% for vb in D.groups.models %}<div>{{ m.ctable(vb, 'subj_presente', tag='-' ~ cls(vb)) }}</div>{% endfor %}
+</div>
+<div class="keep">
+<h4>L’irrégularité de yo passe à toutes les personnes</h4>
+<table class="data">
+  <thead><tr><th>verbe</th><th>présent (yo)</th><th>subjonctif : yo</th><th>tú</th><th>nosotros</th></tr></thead>
+  <tbody>
+  {% for vb in ['tener', 'hacer', 'decir', 'poner', 'salir', 'venir', 'traer', 'oír', 'conocer', 'ver'] %}
+    <tr><td>{{ anchor(vb) }}{{ vb }}</td><td>{{ fmt(vb, 'presente', 0) }}</td><td>{{ fmt(vb, 'subj_presente', 0) }}</td><td>{{ fmt(vb, 'subj_presente', 1) }}</td><td>{{ fmt(vb, 'subj_presente', 3) }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+<div class="two" style="margin-top:3mm">
+{% call m.callout('pattern', 'Les verbes « botte » gardent leur botte') %}
+<p><span class="es">{{ V.querer.subj_presente[0] }}, {{ V.poder.subj_presente[0] }}, {{ V.pensar.subj_presente[0] }}</span>, mais hors de la botte : <span class="es">{{ V.querer.subj_presente[3] }}, {{ V.poder.subj_presente[3] }}</span>.</p>
+<p>Les verbes « botte » en <b>-ir</b> changent aussi à nosotros et vosotros, comme à l’indefinido : <span class="es">{{ V.dormir.subj_presente[3] }}, {{ V.pedir.subj_presente[3] }}, {{ V.sentir.subj_presente[3] }}</span>.</p>
+{% endcall %}
+{% call m.callout('trick', 'Orthographe, pas irrégularité') %}
+<p>Pour garder le son devant <b>e</b> : -car → <b>-que</b>, -gar → <b>-gue</b>, -zar → <b>-ce</b>, -guar → <b>-güe</b>.<br><span class="es">buscar → busque</span> · <span class="es">llegar → llegue</span> · <span class="es">empezar → {{ V.empezar.subj_presente[0] }}</span> · <span class="es">jugar → {{ V.jugar.subj_presente[0] }}</span> · <span class="es">averiguar → averigüe</span></p>
+{% endcall %}
+</div>
+
+{{ m.sec('s-subj-irr') }}
+<p class="lead">Six verbes dont la forme yo ne finit pas par -o. Ils ont leur propre radical au subjonctif. Pour les retenir : <b>DISHES</b> = <b>d</b>ar, <b>i</b>r, <b>s</b>er, <b>h</b>aber, <b>e</b>star, <b>s</b>aber.</p>
+<div class="grid g3">
+  {% for vb in D.groups.subj_irregular %}<div>{{ m.ctable(vb, 'subj_presente') }}</div>{% endfor %}
+</div>
+{% call m.callout('pattern', 'Les accents') %}
+<p><span class="es">{{ V.dar.subj_presente[0] }}</span> (que je donne) prend un accent pour le distinguer de <span class="es">de</span> (de). <span class="es">estar</span> garde l’accent tonique sur la terminaison : <span class="es">{{ V.estar.subj_presente|join(', ') }}</span>.</p>
+{% endcall %}
+
+{{ m.sec('s-subj-imp') }}
+<p class="lead">Prends la forme <b>ellos</b> de l’indefinido, enlève <b>-ron</b>, et ajoute <b>-ra</b> + les marques de personne. Toutes les irrégularités de l’indefinido viennent gratuitement.</p>
+<div class="formula small">
+  {% for vb in ['hablar', 'tener', 'pedir'] %}
+  <div class="row c-{{ cls(vb) }}">
+    <span class="blk"><span class="box stem">{{ V[vb].indefinido[5] }}</span></span><span class="op">→</span>
+    <span class="blk"><span class="box stem">{{ V[vb].indefinido[5][:-3] }}</span></span><span class="op">+</span>
+    <span class="blk"><span class="box vow">ra</span></span><span class="op">=</span>
+    <span class="blk"><span class="box res">{{ V[vb].subj_imperfecto[0] }}</span></span>
+  </div>
+  {% endfor %}
+</div>
+<div class="two">
+  <table class="data keep">
+    <thead><tr><th>verbe</th><th>indefinido (ellos)</th><th>yo</th><th>nosotros</th></tr></thead>
+    <tbody>
+    {% for vb in ['hablar', 'comer', 'vivir', 'tener', 'ser', 'hacer', 'decir', 'poder', 'dormir', 'pedir'] %}
+      <tr><td>{{ anchor(vb) }}{{ vb }}{% if vb == 'ser' %} / ir{% endif %}</td><td>{{ fmt(vb, 'indefinido', 5) }}</td><td>{{ fmt(vb, 'subj_imperfecto', 0) }}</td><td>{{ fmt(vb, 'subj_imperfecto', 3) }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <div>
+    {{ m.ctable('tener', 'subj_imperfecto', tag='-er') }}
+    {% call m.callout('pattern', 'Régularité') %}
+    <p><b>nosotros</b> a toujours un accent : <span class="es">{{ V.hablar.subj_imperfecto[3] }}, {{ V.tener.subj_imperfecto[3] }}, {{ V.ser.subj_imperfecto[3] }}</span>.</p>
+    <p>Tu rencontreras aussi une deuxième forme en <b>-se</b> (<span class="es">tuviese, hablase</span>). Elle a le même sens ; il suffit de la reconnaître.</p>
+    {% endcall %}
+  </div>
+</div>
+{{ m.examples(D.sentences.subj_imperfecto) }}
+
+{{ m.sec('s-subj-use') }}
+<p class="lead">Deux propositions reliées par <b>que</b>, avec deux sujets différents : la première déclenche le subjonctif dans la seconde. <span class="es">Quiero que vengas</span>, mais <span class="es">Quiero venir</span> (même sujet → infinitif), comme en français.</p>
+<table class="data keep tight">
+  <colgroup><col style="width:19%"><col style="width:29%"><col style="width:52%"></colgroup>
+  <thead><tr><th>emploi</th><th>déclencheurs typiques</th><th>exemple</th></tr></thead>
+  <tbody>
+  {% set uses = [
+    ('wishes', 'Souhaits, demandes', 'querer que, esperar que, ojalá, pedir que'),
+    ('emotions', 'Sentiments', 'me alegra que, siento que, me molesta que'),
+    ('doubt', 'Doute, négation', 'no creo que, dudo que, es posible que'),
+    ('purpose', 'But', 'para que'),
+    ('time', 'Temps (futur)', 'cuando, en cuanto, hasta que (pour le futur)'),
+    ('advice', 'Conseil, nécessité', 'es importante que, recomendar que, es necesario que'),
+  ] %}
+  {% for key, label, trig in uses %}
+    <tr><td><b>{{ label }}</b></td><td class="small">{{ trig }}</td><td>{% for s in D.sentences.subj_uses[key] %}{{ stars(s.es) }}<br><span class="muted small">{{ s.fr }}</span>{% if not loop.last %}<br>{% endif %}{% endfor %}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+<div class="two" style="margin-top:4mm">
+{% call m.callout('trick', 'Comme en français') %}
+<p>Les déclencheurs sont presque les mêmes qu’en français : <span class="fr">je veux que tu viennes</span> = <span class="es">quiero que vengas</span> ; <span class="fr">je ne crois pas que ce soit vrai</span> = <span class="es">no creo que sea verdad</span>.</p>
+<p>Les faits et les opinions affirmées prennent l’indicatif : <span class="es">Creo que es verdad.</span> Le « quand » d’habitude aussi : <span class="es">Cuando llego a casa, ceno.</span></p>
+{% endcall %}
+{% call m.callout('trap', 'Deux pièges pour francophones') %}
+<ul>
+<li><span class="es">Espero que</span> + subjonctif : <span class="es">Espero que estés bien</span> (mais <span class="fr">j’espère que tu vas bien</span>).</li>
+<li><span class="es">Cuando</span> + subjonctif pour le futur : <span class="es">Cuando llegues…</span> (mais <span class="fr">quand tu arriveras…</span>).</li>
+</ul>
+{% endcall %}
+</div>
+
+{{ m.sec('ex-part5') }}
+{% call m.callout('practice', 'Entraînement : partie 5') %}<p>Corrigés à la fin du livre.</p>{% endcall %}
+{{ m.exercises('part5') }}
+
+{# ================================================================== #}
+{#                              PARTIE 6                               #}
+{# ================================================================== #}
+{{ divider(OUTLINE[6]) }}
+
+{% for vb in D.groups.models %}
+{% if loop.first %}{{ m.sec('s-master') }}{% else %}<div class="sec-start"></div>{% endif %}
+<div class="master">
+  <div class="master-head c-{{ cls(vb) }}"><span class="vb e-{{ cls(vb) }}" style="color:inherit">{{ vb }}</span><span class="mean">{{ V[vb].fr }}</span>
+    <span class="nf"><span class="muted small">gerundio</span> {{ nonfinite(vb, 'gerundio') }} &nbsp; <span class="muted small">participio</span> {{ nonfinite(vb, 'participio') }}</span></div>
+  <div class="grid g3">
+    {% for t in ['presente', 'indefinido', 'imperfecto', 'futuro', 'condicional'] %}
+    <div>{{ m.ctable(vb, t, short=True, title=TS[t], compact=True) }}</div>
+    {% if t == 'imperfecto' %}<div><div class="tbl c-{{ cls(vb) }} compact"><div class="head"><span class="vb">Perfecto</span><span class="mean">haber + participio</span></div><table>{% for i in range(6) %}<tr><td class="per">{{ PS[i] }}</td><td class="frm"><span class="pron">{{ V.haber.presente[i] }}</span> {{ nonfinite(vb, 'participio') }}</td></tr>{% endfor %}</table></div></div>{% endif %}
+    {% endfor %}
+    {% for t in ['subj_presente', 'subj_imperfecto'] %}
+    <div>{{ m.ctable(vb, t, short=True, title=TS[t], compact=True) }}</div>
+    {% endfor %}
+    <div class="tbl c-{{ cls(vb) }} compact"><div class="head"><span class="vb">Imperativo</span><span class="mean">affirmatif · négatif</span></div>
+      <table>{% for p in D.imperative_persons %}<tr><td class="per">{{ p.label }}</td><td class="frm">{{ fmt_plain(vb, 'imperativo', p.key) }} <span class="muted">·</span> <span class="pron">no</span> {{ fmt(vb, 'subj_presente', {'tu':1,'usted':2,'nosotros':3,'vosotros':4,'ustedes':5}[p.key]) }}</td></tr>{% endfor %}</table></div>
+  </div>
+</div>
+{% endfor %}
+
+{{ m.sec('s-quickref') }}
+<p class="lead">Les 25 verbes irréguliers les plus fréquents, à tous les temps principaux. Les soulignements pointillés montrent exactement où chaque forme quitte le modèle régulier.</p>
+{% for vb in D.groups.top25 %}
+<div class="qr-block c-{{ cls(vb) }}"{{ reg(vb) }}>
+  <div class="qh"><span class="vb">{{ vb }}</span><span class="mean">{{ V[vb].fr }}</span><span class="no">{{ loop.index }} / 25</span></div>
+  <table class="qr">
+    <thead><tr><th></th>{% for t in ['presente', 'indefinido', 'imperfecto', 'futuro', 'condicional', 'subj_presente', 'subj_imperfecto'] %}<th>{{ TS[t] }}</th>{% endfor %}</tr></thead>
+    <tbody>
+    {% for i in range(6) %}
+      <tr><td class="per">{{ PS[i] }}</td>{% for t in ['presente', 'indefinido', 'imperfecto', 'futuro', 'condicional', 'subj_presente', 'subj_imperfecto'] %}<td>{{ fmt(vb, t, i) }}</td>{% endfor %}</tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <div class="qr-extra">
+    <span class="lbl">imperativo</span>{% for p in D.imperative_persons %}<span class="muted small">{{ p.label }}</span> {{ fmt_plain(vb, 'imperativo', p.key) }}{% if not loop.last %} &nbsp;{% endif %}{% endfor %}
+    <span class="sep">|</span><span class="lbl">gerundio</span>{{ nonfinite(vb, 'gerundio') }}<span class="sep">|</span><span class="lbl">participio</span>{{ nonfinite(vb, 'participio') }}
+    {% if V[vb].get('impersonal') %}<span class="sep">|</span><span class="lbl">impersonnel</span><b>{{ V[vb].impersonal }}</b>{% endif %}
+  </div>
+  {% if V[vb].get('imperativo') and V[vb].imperativo[0] is none %}<div class="note">L’impératif de {{ vb }} ne s’emploie pas en pratique.</div>{% endif %}
+</div>
+{% endfor %}
+
+{{ m.sec('s-nonfinite') }}
+<div class="two">
+  <div>
+    <h3 style="margin-top:0">Gérondif · gerundio <span class="tag">-ant</span></h3>
+    <p>-ar → <b class="e-ar">-ando</b> · -er / -ir → <b class="e-er">-iendo</b>. Avec <b>estar</b>, il exprime une action en cours : <span class="es">Estoy comiendo</span> = <span class="fr">je suis en train de manger</span>.</p>
+    <table class="data keep">
+      <tbody>
+      {% for vb in D.groups.models %}<tr><td>{{ vb }}</td><td>{{ nonfinite(vb, 'gerundio') }}</td><td class="small muted">régulier</td></tr>{% endfor %}
+      {% for vb in ['leer', 'oír', 'traer', 'caer', 'ir'] %}<tr><td>{{ vb }}</td><td>{{ nonfinite(vb, 'gerundio') }}</td><td class="small muted">{% if loop.first %}voyelle + -iendo → -yendo{% endif %}</td></tr>{% endfor %}
+      {% for vb in ['pedir', 'decir', 'venir', 'sentir', 'dormir', 'morir', 'poder'] %}<tr><td>{{ vb }}</td><td>{{ nonfinite(vb, 'gerundio') }}</td><td class="small muted">{% if loop.first %}e → i, o → u dans le radical{% endif %}</td></tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h3 style="margin-top:0">Participe passé · participio <span class="tag">-é</span></h3>
+    <p>-ar → <b class="e-ar">-ado</b> · -er / -ir → <b class="e-er">-ido</b>. Avec <b>haber</b>, il ne change jamais (<span class="es">ha abierto</span>). Employé comme adjectif, il s’accorde : <span class="es">la puerta está abierta</span>, <span class="es">las tiendas están cerradas</span>.</p>
+    <table class="data keep">
+      <tbody>
+      {% for vb in D.groups.models %}<tr><td>{{ vb }}</td><td>{{ nonfinite(vb, 'participio') }}</td><td class="small muted">régulier</td></tr>{% endfor %}
+      {% for vb in ['leer', 'oír', 'traer', 'caer'] %}<tr><td>{{ vb }}</td><td>{{ nonfinite(vb, 'participio') }}</td><td class="small muted">{% if loop.first %}a / e / o + -ido → -ído{% endif %}</td></tr>{% endfor %}
+      {% for x in D.irregular_participles %}<tr><td>{{ x.verb }}</td><td><span class="whole e-{{ cls(x.verb) }} irr">{{ x.participle }}</span></td><td class="small muted">{% if loop.first %}irrégulier{% endif %}</td></tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{{ m.sec('s-index') }}
+<div class="idx">
+{% for vb in INDEX|sort %}
+  <div class="it"><span class="w">{{ vb }}</span><span class="m">{{ V[vb].fr if vb in V else '' }}</span>
+  {% for sid, label in INDEX[vb] %}<a href="#ix-{{ vb }}-{{ sid }}">{{ SN[sid] }} {{ label }}</a>{% endfor %}
+  </div>
+{% endfor %}
+</div>
+
+{# ================================================================== #}
+{#                             CORRIGÉS                                #}
+{# ================================================================== #}
+{{ divider(OUTLINE[7]) }}
+{{ section(None) }}
+<h2 class="sec sec-start" data-hdr="Corrigés">Corrigés</h2>
+<div class="answers">
+{% for p in OUTLINE[:6] %}
+  <h3>Partie {{ p.num }} · {{ p.title }}</h3>
+  {{ m.answers('part' ~ p.num) }}
+{% endfor %}
+</div>
+
+</body>
+</html>

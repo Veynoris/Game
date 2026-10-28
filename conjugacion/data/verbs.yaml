@@ -1,0 +1,1021 @@
+# =====================================================================
+#  La Conjugaison Espagnole: the single source of truth
+#  Every conjugated form in the guide comes from this file.
+#  Person order everywhere: yo, tú, él/ella/usted, nosotros, vosotros, ellos/ellas/ustedes
+# =====================================================================
+
+persons:
+  - {key: yo,       label: "yo",                    short: "yo",       marker: "o",   fr: "je",          fr_end: "-e / -s"}
+  - {key: tu,       label: "tú",                    short: "tú",       marker: "s",   fr: "tu",          fr_end: "-s"}
+  - {key: el,       label: "él / ella / usted",     short: "él",       marker: "",    fr: "il / elle",   fr_end: "-e / -t"}
+  - {key: nosotros, label: "nosotros/as",   short: "nosotros", marker: "mos", fr: "nous",        fr_end: "-ons"}
+  - {key: vosotros, label: "vosotros/as",   short: "vosotros", marker: "is",  fr: "vous",        fr_end: "-ez"}
+  - {key: ellos,    label: "ellos / ellas / ustedes", short: "ellos",  marker: "n",   fr: "ils / elles", fr_end: "-ent"}
+
+imperative_persons:
+  - {key: tu,       label: "tú"}
+  - {key: usted,    label: "usted"}
+  - {key: nosotros, label: "nosotros"}
+  - {key: vosotros, label: "vosotros"}
+  - {key: ustedes,  label: "ustedes"}
+
+classes:
+  ar: {theme_vowel: a, colour: terracotta}
+  er: {theme_vowel: e, colour: olive}
+  ir: {theme_vowel: e, colour: blue}
+
+# ---------------------------------------------------------------------
+#  Tenses: names and regular endings.
+#  base: what the ending is glued to
+#    stem       = infinitive minus -ar/-er/-ir
+#    infinitive = the whole infinitive
+#    yo_stem    = present "yo" form minus -o
+#    ellos_pret = 3rd person plural indefinido minus -ron
+# ---------------------------------------------------------------------
+tenses:
+  presente:
+    es: "Presente de indicativo"
+    en: "Present"
+    base: stem
+    endings:
+      ar: [o, as, a, amos, áis, an]
+      er: [o, es, e, emos, éis, en]
+      ir: [o, es, e, imos, ís, en]
+  indefinido:
+    es: "Pretérito indefinido"
+    en: "Simple past"
+    base: stem
+    endings:
+      ar: [é, aste, ó, amos, asteis, aron]
+      er: [í, iste, ió, imos, isteis, ieron]
+      ir: [í, iste, ió, imos, isteis, ieron]
+  imperfecto:
+    es: "Pretérito imperfecto"
+    en: "Imperfect (past background)"
+    base: stem
+    endings:
+      ar: [aba, abas, aba, ábamos, abais, aban]
+      er: [ía, ías, ía, íamos, íais, ían]
+      ir: [ía, ías, ía, íamos, íais, ían]
+  futuro:
+    es: "Futuro simple"
+    en: "Future"
+    base: infinitive
+    endings:
+      ar: [é, ás, á, emos, éis, án]
+      er: [é, ás, á, emos, éis, án]
+      ir: [é, ás, á, emos, éis, án]
+  condicional:
+    es: "Condicional simple"
+    en: "Conditional"
+    base: infinitive
+    endings:
+      ar: [ía, ías, ía, íamos, íais, ían]
+      er: [ía, ías, ía, íamos, íais, ían]
+      ir: [ía, ías, ía, íamos, íais, ían]
+  subj_presente:
+    es: "Presente de subjuntivo"
+    en: "Present subjunctive"
+    base: yo_stem
+    endings:
+      ar: [e, es, e, emos, éis, en]
+      er: [a, as, a, amos, áis, an]
+      ir: [a, as, a, amos, áis, an]
+  subj_imperfecto:
+    es: "Pretérito imperfecto de subjuntivo"
+    en: "Imperfect subjunctive"
+    base: ellos_pret
+    endings:
+      ar: [ra, ras, ra, ramos, rais, ran]
+      er: [ra, ras, ra, ramos, rais, ran]
+      ir: [ra, ras, ra, ramos, rais, ran]
+
+# Endings used by the irregular-stem preterites (tuv-e, hic-e, dij-e ...)
+strong_preterite_endings: [e, iste, o, imos, isteis, ieron]
+strong_preterite_j_ellos: eron     # dijeron, trajeron (never *dijieron)
+
+strong_preterite_stems:
+  - {verb: tener,  stem: tuv}
+  - {verb: estar,  stem: estuv}
+  - {verb: poder,  stem: pud}
+  - {verb: poner,  stem: pus}
+  - {verb: hacer,  stem: hic}
+  - {verb: querer, stem: quis}
+  - {verb: venir,  stem: vin}
+  - {verb: decir,  stem: dij}
+  - {verb: traer,  stem: traj}
+  - {verb: saber,  stem: sup}
+  - {verb: haber,  stem: hub}
+
+future_stems:
+  - {verb: tener,  stem: tendr}
+  - {verb: poner,  stem: pondr}
+  - {verb: salir,  stem: saldr}
+  - {verb: venir,  stem: vendr}
+  - {verb: poder,  stem: podr}
+  - {verb: saber,  stem: sabr}
+  - {verb: haber,  stem: habr}
+  - {verb: querer, stem: querr}
+  - {verb: decir,  stem: dir}
+  - {verb: hacer,  stem: har}
+  - {verb: caber,  stem: cabr}
+  - {verb: valer,  stem: valdr}
+
+irregular_participles:
+  - {verb: hacer,    participle: hecho,   fr: "fait"}
+  - {verb: decir,    participle: dicho,   fr: "dit"}
+  - {verb: ver,      participle: visto,   fr: "vu"}
+  - {verb: escribir, participle: escrito, fr: "écrit"}
+  - {verb: poner,    participle: puesto,  fr: "mis"}
+  - {verb: volver,   participle: vuelto,  fr: "revenu"}
+  - {verb: abrir,    participle: abierto, fr: "ouvert"}
+  - {verb: romper,   participle: roto,    fr: "cassé"}
+  - {verb: morir,    participle: muerto,  fr: "mort"}
+
+# Extra non-finite forms used on the gerund & participle page
+nonfinite_extra:
+  - {verb: leer,     en: "to read",       fr: "lire",        gerundio: leyendo,   participio: leído}
+  - {verb: caer,     en: "to fall",       fr: "tomber",      gerundio: cayendo,   participio: caído}
+  - {verb: morir,    en: "to die",        fr: "mourir",      gerundio: muriendo,  participio: muerto}
+  - {verb: abrir,    en: "to open",       fr: "ouvrir",      gerundio: abriendo,  participio: abierto}
+  - {verb: romper,   en: "to break",      fr: "casser",      gerundio: rompiendo, participio: roto}
+
+# ---------------------------------------------------------------------
+#  VERBS
+#  regular: true  -> every form must be reproducible from the rule
+#  regular_except -> tenses of an otherwise regular verb that are not
+#  imperativo: tu, usted, nosotros, vosotros, ustedes (null = not used)
+# ---------------------------------------------------------------------
+verbs:
+
+  # ---------- model regular verbs ----------
+  hablar:
+    en: "to speak"
+    fr: "parler"
+    regular: true
+    presente:        [hablo, hablas, habla, hablamos, habláis, hablan]
+    indefinido:      [hablé, hablaste, habló, hablamos, hablasteis, hablaron]
+    imperfecto:      [hablaba, hablabas, hablaba, hablábamos, hablabais, hablaban]
+    futuro:          [hablaré, hablarás, hablará, hablaremos, hablaréis, hablarán]
+    condicional:     [hablaría, hablarías, hablaría, hablaríamos, hablaríais, hablarían]
+    subj_presente:   [hable, hables, hable, hablemos, habléis, hablen]
+    subj_imperfecto: [hablara, hablaras, hablara, habláramos, hablarais, hablaran]
+    imperativo:      [habla, hable, hablemos, hablad, hablen]
+    gerundio: hablando
+    participio: hablado
+    examples:
+      - {es: "*Hablo* español, francés y árabe.", fr: "Je parle espagnol, français et arabe."}
+      - {es: "¿*Hablas* inglés?", fr: "Tu parles anglais ?"}
+      - {es: "Mis padres *hablan* darija en casa.", fr: "Mes parents parlent darija à la maison."}
+
+  comer:
+    en: "to eat"
+    fr: "manger"
+    regular: true
+    presente:        [como, comes, come, comemos, coméis, comen]
+    indefinido:      [comí, comiste, comió, comimos, comisteis, comieron]
+    imperfecto:      [comía, comías, comía, comíamos, comíais, comían]
+    futuro:          [comeré, comerás, comerá, comeremos, comeréis, comerán]
+    condicional:     [comería, comerías, comería, comeríamos, comeríais, comerían]
+    subj_presente:   [coma, comas, coma, comamos, comáis, coman]
+    subj_imperfecto: [comiera, comieras, comiera, comiéramos, comierais, comieran]
+    imperativo:      [come, coma, comamos, comed, coman]
+    gerundio: comiendo
+    participio: comido
+    examples:
+      - {es: "*Como* en casa a las dos.", fr: "Je mange à la maison à deux heures."}
+      - {es: "¿Qué *comes* en el desayuno?", fr: "Qu’est-ce que tu manges au petit-déjeuner ?"}
+      - {es: "Los domingos *comemos* con mi abuela.", fr: "Le dimanche, nous déjeunons chez ma grand-mère."}
+
+  vivir:
+    en: "to live"
+    fr: "vivre, habiter"
+    regular: true
+    presente:        [vivo, vives, vive, vivimos, vivís, viven]
+    indefinido:      [viví, viviste, vivió, vivimos, vivisteis, vivieron]
+    imperfecto:      [vivía, vivías, vivía, vivíamos, vivíais, vivían]
+    futuro:          [viviré, vivirás, vivirá, viviremos, viviréis, vivirán]
+    condicional:     [viviría, vivirías, viviría, viviríamos, viviríais, vivirían]
+    subj_presente:   [viva, vivas, viva, vivamos, viváis, vivan]
+    subj_imperfecto: [viviera, vivieras, viviera, viviéramos, vivierais, vivieran]
+    imperativo:      [vive, viva, vivamos, vivid, vivan]
+    gerundio: viviendo
+    participio: vivido
+    examples:
+      - {es: "*Vivo* en Casablanca.", fr: "J’habite à Casablanca."}
+      - {es: "¿Dónde *vives*?", fr: "Où est-ce que tu habites ?"}
+      - {es: "Mis primos *viven* en Madrid.", fr: "Mes cousins habitent à Madrid."}
+
+  # ---------- more regular verbs (used in exercises) ----------
+  trabajar:
+    en: "to work"
+    fr: "travailler"
+    regular: true
+    presente:        [trabajo, trabajas, trabaja, trabajamos, trabajáis, trabajan]
+    indefinido:      [trabajé, trabajaste, trabajó, trabajamos, trabajasteis, trabajaron]
+    imperfecto:      [trabajaba, trabajabas, trabajaba, trabajábamos, trabajabais, trabajaban]
+    futuro:          [trabajaré, trabajarás, trabajará, trabajaremos, trabajaréis, trabajarán]
+    subj_presente:   [trabaje, trabajes, trabaje, trabajemos, trabajéis, trabajen]
+    gerundio: trabajando
+    participio: trabajado
+
+  estudiar:
+    en: "to study"
+    fr: "étudier"
+    regular: true
+    presente:        [estudio, estudias, estudia, estudiamos, estudiáis, estudian]
+    indefinido:      [estudié, estudiaste, estudió, estudiamos, estudiasteis, estudiaron]
+    imperfecto:      [estudiaba, estudiabas, estudiaba, estudiábamos, estudiabais, estudiaban]
+    futuro:          [estudiaré, estudiarás, estudiará, estudiaremos, estudiaréis, estudiarán]
+    subj_presente:   [estudie, estudies, estudie, estudiemos, estudiéis, estudien]
+    gerundio: estudiando
+    participio: estudiado
+
+  beber:
+    en: "to drink"
+    fr: "boire"
+    regular: true
+    presente:        [bebo, bebes, bebe, bebemos, bebéis, beben]
+    indefinido:      [bebí, bebiste, bebió, bebimos, bebisteis, bebieron]
+    imperfecto:      [bebía, bebías, bebía, bebíamos, bebíais, bebían]
+    futuro:          [beberé, beberás, beberá, beberemos, beberéis, beberán]
+    subj_presente:   [beba, bebas, beba, bebamos, bebáis, beban]
+    gerundio: bebiendo
+    participio: bebido
+
+  aprender:
+    en: "to learn"
+    fr: "apprendre"
+    regular: true
+    presente:        [aprendo, aprendes, aprende, aprendemos, aprendéis, aprenden]
+    indefinido:      [aprendí, aprendiste, aprendió, aprendimos, aprendisteis, aprendieron]
+    imperfecto:      [aprendía, aprendías, aprendía, aprendíamos, aprendíais, aprendían]
+    futuro:          [aprenderé, aprenderás, aprenderá, aprenderemos, aprenderéis, aprenderán]
+    subj_presente:   [aprenda, aprendas, aprenda, aprendamos, aprendáis, aprendan]
+    gerundio: aprendiendo
+    participio: aprendido
+
+  escribir:
+    en: "to write"
+    fr: "écrire"
+    regular: true
+    regular_except: [participio]
+    presente:        [escribo, escribes, escribe, escribimos, escribís, escriben]
+    indefinido:      [escribí, escribiste, escribió, escribimos, escribisteis, escribieron]
+    imperfecto:      [escribía, escribías, escribía, escribíamos, escribíais, escribían]
+    futuro:          [escribiré, escribirás, escribirá, escribiremos, escribiréis, escribirán]
+    subj_presente:   [escriba, escribas, escriba, escribamos, escribáis, escriban]
+    gerundio: escribiendo
+    participio: escrito
+
+  # ---------- regular verbs used with pronouns ----------
+  gustar:
+    en: "to please (to like)"
+    fr: "plaire (→ aimer)"
+    regular: true
+    presente:        [gusto, gustas, gusta, gustamos, gustáis, gustan]
+    condicional:     [gustaría, gustarías, gustaría, gustaríamos, gustaríais, gustarían]
+    imperfecto:      [gustaba, gustabas, gustaba, gustábamos, gustabais, gustaban]
+    gerundio: gustando
+    participio: gustado
+
+  # ---------- reflexive verbs (present only) ----------
+  levantarse:
+    en: "to get up"
+    fr: "se lever"
+    regular: true
+    reflexive: true
+    presente: ["me levanto", "te levantas", "se levanta", "nos levantamos", "os levantáis", "se levantan"]
+    examples:
+      - {es: "*Me levanto* a las siete.", fr: "Je me lève à sept heures."}
+      - {es: "Los sábados *nos levantamos* tarde.", fr: "Le samedi, nous nous levons tard."}
+  llamarse:
+    en: "to be called"
+    fr: "s'appeler"
+    regular: true
+    reflexive: true
+    presente: ["me llamo", "te llamas", "se llama", "nos llamamos", "os llamáis", "se llaman"]
+    examples:
+      - {es: "¿Cómo *te llamas*?", fr: "Comment tu t’appelles ?"}
+      - {es: "*Me llamo* Sara.", fr: "Je m’appelle Sara."}
+  ducharse:
+    en: "to have a shower"
+    fr: "se doucher"
+    regular: true
+    reflexive: true
+    presente: ["me ducho", "te duchas", "se ducha", "nos duchamos", "os ducháis", "se duchan"]
+    examples:
+      - {es: "Mi hermano *se ducha* por la noche.", fr: "Mon frère se douche le soir."}
+
+  # ---------- stem-changing ("boot") verbs ----------
+  pensar:
+    en: "to think"
+    fr: "penser"
+    change: "e → ie"
+    presente:        [pienso, piensas, piensa, pensamos, pensáis, piensan]
+    indefinido:      [pensé, pensaste, pensó, pensamos, pensasteis, pensaron]
+    imperfecto:      [pensaba, pensabas, pensaba, pensábamos, pensabais, pensaban]
+    futuro:          [pensaré, pensarás, pensará, pensaremos, pensaréis, pensarán]
+    condicional:     [pensaría, pensarías, pensaría, pensaríamos, pensaríais, pensarían]
+    subj_presente:   [piense, pienses, piense, pensemos, penséis, piensen]
+    subj_imperfecto: [pensara, pensaras, pensara, pensáramos, pensarais, pensaran]
+    imperativo:      [piensa, piense, pensemos, pensad, piensen]
+    gerundio: pensando
+    participio: pensado
+    examples:
+      - {es: "¿Qué *piensas*?", fr: "Qu’est-ce que tu en penses ?"}
+
+  querer:
+    en: "to want; to love"
+    fr: "vouloir ; aimer"
+    change: "e → ie"
+    presente:        [quiero, quieres, quiere, queremos, queréis, quieren]
+    indefinido:      [quise, quisiste, quiso, quisimos, quisisteis, quisieron]
+    imperfecto:      [quería, querías, quería, queríamos, queríais, querían]
+    futuro:          [querré, querrás, querrá, querremos, querréis, querrán]
+    condicional:     [querría, querrías, querría, querríamos, querríais, querrían]
+    subj_presente:   [quiera, quieras, quiera, queramos, queráis, quieran]
+    subj_imperfecto: [quisiera, quisieras, quisiera, quisiéramos, quisierais, quisieran]
+    imperativo:      [quiere, quiera, queramos, quered, quieran]
+    gerundio: queriendo
+    participio: querido
+    examples:
+      - {es: "*Quiero* un café, por favor.", fr: "Je voudrais un café, s’il vous plaît."}
+
+  empezar:
+    en: "to begin"
+    fr: "commencer"
+    change: "e → ie"
+    presente:        [empiezo, empiezas, empieza, empezamos, empezáis, empiezan]
+    indefinido:      [empecé, empezaste, empezó, empezamos, empezasteis, empezaron]
+    imperfecto:      [empezaba, empezabas, empezaba, empezábamos, empezabais, empezaban]
+    futuro:          [empezaré, empezarás, empezará, empezaremos, empezaréis, empezarán]
+    condicional:     [empezaría, empezarías, empezaría, empezaríamos, empezaríais, empezarían]
+    subj_presente:   [empiece, empieces, empiece, empecemos, empecéis, empiecen]
+    subj_imperfecto: [empezara, empezaras, empezara, empezáramos, empezarais, empezaran]
+    imperativo:      [empieza, empiece, empecemos, empezad, empiecen]
+    gerundio: empezando
+    participio: empezado
+    examples:
+      - {es: "La clase *empieza* a las nueve.", fr: "Le cours commence à neuf heures."}
+
+  poder:
+    en: "can, to be able to"
+    fr: "pouvoir"
+    change: "o → ue"
+    presente:        [puedo, puedes, puede, podemos, podéis, pueden]
+    indefinido:      [pude, pudiste, pudo, pudimos, pudisteis, pudieron]
+    imperfecto:      [podía, podías, podía, podíamos, podíais, podían]
+    futuro:          [podré, podrás, podrá, podremos, podréis, podrán]
+    condicional:     [podría, podrías, podría, podríamos, podríais, podrían]
+    subj_presente:   [pueda, puedas, pueda, podamos, podáis, puedan]
+    subj_imperfecto: [pudiera, pudieras, pudiera, pudiéramos, pudierais, pudieran]
+    imperativo:      [null, null, null, null, null]
+    gerundio: pudiendo
+    participio: podido
+    examples:
+      - {es: "¿*Puedes* repetir, por favor?", fr: "Tu peux répéter, s’il te plaît ?"}
+
+  dormir:
+    en: "to sleep"
+    fr: "dormir"
+    change: "o → ue"
+    presente:        [duermo, duermes, duerme, dormimos, dormís, duermen]
+    indefinido:      [dormí, dormiste, durmió, dormimos, dormisteis, durmieron]
+    imperfecto:      [dormía, dormías, dormía, dormíamos, dormíais, dormían]
+    futuro:          [dormiré, dormirás, dormirá, dormiremos, dormiréis, dormirán]
+    condicional:     [dormiría, dormirías, dormiría, dormiríamos, dormiríais, dormirían]
+    subj_presente:   [duerma, duermas, duerma, durmamos, durmáis, duerman]
+    subj_imperfecto: [durmiera, durmieras, durmiera, durmiéramos, durmierais, durmieran]
+    imperativo:      [duerme, duerma, durmamos, dormid, duerman]
+    gerundio: durmiendo
+    participio: dormido
+    examples:
+      - {es: "*Duermo* ocho horas.", fr: "Je dors huit heures."}
+
+  volver:
+    en: "to come back, to return"
+    fr: "revenir, rentrer"
+    change: "o → ue"
+    presente:        [vuelvo, vuelves, vuelve, volvemos, volvéis, vuelven]
+    indefinido:      [volví, volviste, volvió, volvimos, volvisteis, volvieron]
+    imperfecto:      [volvía, volvías, volvía, volvíamos, volvíais, volvían]
+    futuro:          [volveré, volverás, volverá, volveremos, volveréis, volverán]
+    condicional:     [volvería, volverías, volvería, volveríamos, volveríais, volverían]
+    subj_presente:   [vuelva, vuelvas, vuelva, volvamos, volváis, vuelvan]
+    subj_imperfecto: [volviera, volvieras, volviera, volviéramos, volvierais, volvieran]
+    imperativo:      [vuelve, vuelva, volvamos, volved, vuelvan]
+    gerundio: volviendo
+    participio: vuelto
+    examples:
+      - {es: "*Volvemos* a casa a las seis.", fr: "Nous rentrons à la maison à six heures."}
+
+  pedir:
+    en: "to ask for, to order"
+    fr: "demander, commander"
+    change: "e → i"
+    presente:        [pido, pides, pide, pedimos, pedís, piden]
+    indefinido:      [pedí, pediste, pidió, pedimos, pedisteis, pidieron]
+    imperfecto:      [pedía, pedías, pedía, pedíamos, pedíais, pedían]
+    futuro:          [pediré, pedirás, pedirá, pediremos, pediréis, pedirán]
+    condicional:     [pediría, pedirías, pediría, pediríamos, pediríais, pedirían]
+    subj_presente:   [pida, pidas, pida, pidamos, pidáis, pidan]
+    subj_imperfecto: [pidiera, pidieras, pidiera, pidiéramos, pidierais, pidieran]
+    imperativo:      [pide, pida, pidamos, pedid, pidan]
+    gerundio: pidiendo
+    participio: pedido
+    examples:
+      - {es: "Siempre *pido* lo mismo.", fr: "Je commande toujours la même chose."}
+
+  repetir:
+    en: "to repeat"
+    fr: "répéter"
+    change: "e → i"
+    presente:        [repito, repites, repite, repetimos, repetís, repiten]
+    indefinido:      [repetí, repetiste, repitió, repetimos, repetisteis, repitieron]
+    gerundio: repitiendo
+    participio: repetido
+    examples:
+      - {es: "El profesor *repite* la pregunta.", fr: "Le professeur répète la question."}
+
+  jugar:
+    en: "to play (a game, a sport)"
+    fr: "jouer"
+    change: "u → ue"
+    presente:        [juego, juegas, juega, jugamos, jugáis, juegan]
+    indefinido:      [jugué, jugaste, jugó, jugamos, jugasteis, jugaron]
+    imperfecto:      [jugaba, jugabas, jugaba, jugábamos, jugabais, jugaban]
+    futuro:          [jugaré, jugarás, jugará, jugaremos, jugaréis, jugarán]
+    condicional:     [jugaría, jugarías, jugaría, jugaríamos, jugaríais, jugarían]
+    subj_presente:   [juegue, juegues, juegue, juguemos, juguéis, jueguen]
+    subj_imperfecto: [jugara, jugaras, jugara, jugáramos, jugarais, jugaran]
+    imperativo:      [juega, juegue, juguemos, jugad, jueguen]
+    gerundio: jugando
+    participio: jugado
+    examples:
+      - {es: "Los niños *juegan* al fútbol.", fr: "Les enfants jouent au football."}
+
+  sentir:
+    en: "to feel; to be sorry"
+    fr: "sentir, ressentir"
+    change: "e → ie"
+    presente:        [siento, sientes, siente, sentimos, sentís, sienten]
+    indefinido:      [sentí, sentiste, sintió, sentimos, sentisteis, sintieron]
+    imperfecto:      [sentía, sentías, sentía, sentíamos, sentíais, sentían]
+    futuro:          [sentiré, sentirás, sentirá, sentiremos, sentiréis, sentirán]
+    condicional:     [sentiría, sentirías, sentiría, sentiríamos, sentiríais, sentirían]
+    subj_presente:   [sienta, sientas, sienta, sintamos, sintáis, sientan]
+    subj_imperfecto: [sintiera, sintieras, sintiera, sintiéramos, sintierais, sintieran]
+    imperativo:      [siente, sienta, sintamos, sentid, sientan]
+    gerundio: sintiendo
+    participio: sentido
+    examples:
+      - {es: "Lo *siento* mucho.", fr: "Je suis vraiment désolé."}
+
+  # ---------- irregular only in "yo" (present) ----------
+  hacer:
+    en: "to do, to make"
+    fr: "faire"
+    presente:        [hago, haces, hace, hacemos, hacéis, hacen]
+    indefinido:      [hice, hiciste, hizo, hicimos, hicisteis, hicieron]
+    imperfecto:      [hacía, hacías, hacía, hacíamos, hacíais, hacían]
+    futuro:          [haré, harás, hará, haremos, haréis, harán]
+    condicional:     [haría, harías, haría, haríamos, haríais, harían]
+    subj_presente:   [haga, hagas, haga, hagamos, hagáis, hagan]
+    subj_imperfecto: [hiciera, hicieras, hiciera, hiciéramos, hicierais, hicieran]
+    imperativo:      [haz, haga, hagamos, haced, hagan]
+    gerundio: haciendo
+    participio: hecho
+    examples:
+      - {es: "*Hago* los deberes por la tarde.", fr: "Je fais mes devoirs l’après-midi."}
+
+  poner:
+    en: "to put"
+    fr: "mettre"
+    presente:        [pongo, pones, pone, ponemos, ponéis, ponen]
+    indefinido:      [puse, pusiste, puso, pusimos, pusisteis, pusieron]
+    imperfecto:      [ponía, ponías, ponía, poníamos, poníais, ponían]
+    futuro:          [pondré, pondrás, pondrá, pondremos, pondréis, pondrán]
+    condicional:     [pondría, pondrías, pondría, pondríamos, pondríais, pondrían]
+    subj_presente:   [ponga, pongas, ponga, pongamos, pongáis, pongan]
+    subj_imperfecto: [pusiera, pusieras, pusiera, pusiéramos, pusierais, pusieran]
+    imperativo:      [pon, ponga, pongamos, poned, pongan]
+    gerundio: poniendo
+    participio: puesto
+    examples:
+      - {es: "*Pongo* la mesa.", fr: "Je mets la table."}
+
+  salir:
+    en: "to go out, to leave"
+    fr: "sortir, partir"
+    presente:        [salgo, sales, sale, salimos, salís, salen]
+    indefinido:      [salí, saliste, salió, salimos, salisteis, salieron]
+    imperfecto:      [salía, salías, salía, salíamos, salíais, salían]
+    futuro:          [saldré, saldrás, saldrá, saldremos, saldréis, saldrán]
+    condicional:     [saldría, saldrías, saldría, saldríamos, saldríais, saldrían]
+    subj_presente:   [salga, salgas, salga, salgamos, salgáis, salgan]
+    subj_imperfecto: [saliera, salieras, saliera, saliéramos, salierais, salieran]
+    imperativo:      [sal, salga, salgamos, salid, salgan]
+    gerundio: saliendo
+    participio: salido
+    examples:
+      - {es: "*Salgo* de casa a las ocho.", fr: "Je sors de chez moi à huit heures."}
+
+  traer:
+    en: "to bring"
+    fr: "apporter"
+    presente:        [traigo, traes, trae, traemos, traéis, traen]
+    indefinido:      [traje, trajiste, trajo, trajimos, trajisteis, trajeron]
+    imperfecto:      [traía, traías, traía, traíamos, traíais, traían]
+    futuro:          [traeré, traerás, traerá, traeremos, traeréis, traerán]
+    condicional:     [traería, traerías, traería, traeríamos, traeríais, traerían]
+    subj_presente:   [traiga, traigas, traiga, traigamos, traigáis, traigan]
+    subj_imperfecto: [trajera, trajeras, trajera, trajéramos, trajerais, trajeran]
+    imperativo:      [trae, traiga, traigamos, traed, traigan]
+    gerundio: trayendo
+    participio: traído
+    examples:
+      - {es: "*Traigo* el pan.", fr: "J’apporte le pain."}
+
+  saber:
+    en: "to know (facts, how to)"
+    fr: "savoir"
+    presente:        [sé, sabes, sabe, sabemos, sabéis, saben]
+    indefinido:      [supe, supiste, supo, supimos, supisteis, supieron]
+    imperfecto:      [sabía, sabías, sabía, sabíamos, sabíais, sabían]
+    futuro:          [sabré, sabrás, sabrá, sabremos, sabréis, sabrán]
+    condicional:     [sabría, sabrías, sabría, sabríamos, sabríais, sabrían]
+    subj_presente:   [sepa, sepas, sepa, sepamos, sepáis, sepan]
+    subj_imperfecto: [supiera, supieras, supiera, supiéramos, supierais, supieran]
+    imperativo:      [sabe, sepa, sepamos, sabed, sepan]
+    gerundio: sabiendo
+    participio: sabido
+    examples:
+      - {es: "No *sé*.", fr: "Je ne sais pas."}
+
+  conocer:
+    en: "to know (people, places)"
+    fr: "connaître"
+    presente:        [conozco, conoces, conoce, conocemos, conocéis, conocen]
+    indefinido:      [conocí, conociste, conoció, conocimos, conocisteis, conocieron]
+    imperfecto:      [conocía, conocías, conocía, conocíamos, conocíais, conocían]
+    futuro:          [conoceré, conocerás, conocerá, conoceremos, conoceréis, conocerán]
+    condicional:     [conocería, conocerías, conocería, conoceríamos, conoceríais, conocerían]
+    subj_presente:   [conozca, conozcas, conozca, conozcamos, conozcáis, conozcan]
+    subj_imperfecto: [conociera, conocieras, conociera, conociéramos, conocierais, conocieran]
+    imperativo:      [conoce, conozca, conozcamos, conoced, conozcan]
+    gerundio: conociendo
+    participio: conocido
+    examples:
+      - {es: "*Conozco* a tu hermano.", fr: "Je connais ton frère."}
+
+  ver:
+    en: "to see"
+    fr: "voir"
+    presente:        [veo, ves, ve, vemos, veis, ven]
+    indefinido:      [vi, viste, vio, vimos, visteis, vieron]
+    imperfecto:      [veía, veías, veía, veíamos, veíais, veían]
+    futuro:          [veré, verás, verá, veremos, veréis, verán]
+    condicional:     [vería, verías, vería, veríamos, veríais, verían]
+    subj_presente:   [vea, veas, vea, veamos, veáis, vean]
+    subj_imperfecto: [viera, vieras, viera, viéramos, vierais, vieran]
+    imperativo:      [ve, vea, veamos, ved, vean]
+    gerundio: viendo
+    participio: visto
+    examples:
+      - {es: "*Veo* la tele por la noche.", fr: "Je regarde la télé le soir."}
+
+  dar:
+    en: "to give"
+    fr: "donner"
+    presente:        [doy, das, da, damos, dais, dan]
+    indefinido:      [di, diste, dio, dimos, disteis, dieron]
+    imperfecto:      [daba, dabas, daba, dábamos, dabais, daban]
+    futuro:          [daré, darás, dará, daremos, daréis, darán]
+    condicional:     [daría, darías, daría, daríamos, daríais, darían]
+    subj_presente:   [dé, des, dé, demos, deis, den]
+    subj_imperfecto: [diera, dieras, diera, diéramos, dierais, dieran]
+    imperativo:      [da, dé, demos, dad, den]
+    gerundio: dando
+    participio: dado
+    examples:
+      - {es: "Te *doy* mi número.", fr: "Je te donne mon numéro."}
+
+  # ---------- fully irregular ----------
+  ser:
+    en: "to be (identity)"
+    fr: "être"
+    presente:        [soy, eres, es, somos, sois, son]
+    indefinido:      [fui, fuiste, fue, fuimos, fuisteis, fueron]
+    imperfecto:      [era, eras, era, éramos, erais, eran]
+    futuro:          [seré, serás, será, seremos, seréis, serán]
+    condicional:     [sería, serías, sería, seríamos, seríais, serían]
+    subj_presente:   [sea, seas, sea, seamos, seáis, sean]
+    subj_imperfecto: [fuera, fueras, fuera, fuéramos, fuerais, fueran]
+    imperativo:      [sé, sea, seamos, sed, sean]
+    gerundio: siendo
+    participio: sido
+    examples:
+      - {es: "*Soy* de Marruecos.", fr: "Je viens du Maroc."}
+
+  estar:
+    en: "to be (state, place)"
+    fr: "être (état, lieu)"
+    presente:        [estoy, estás, está, estamos, estáis, están]
+    indefinido:      [estuve, estuviste, estuvo, estuvimos, estuvisteis, estuvieron]
+    imperfecto:      [estaba, estabas, estaba, estábamos, estabais, estaban]
+    futuro:          [estaré, estarás, estará, estaremos, estaréis, estarán]
+    condicional:     [estaría, estarías, estaría, estaríamos, estaríais, estarían]
+    subj_presente:   [esté, estés, esté, estemos, estéis, estén]
+    subj_imperfecto: [estuviera, estuvieras, estuviera, estuviéramos, estuvierais, estuvieran]
+    imperativo:      [está, esté, estemos, estad, estén]
+    gerundio: estando
+    participio: estado
+    examples:
+      - {es: "*Estoy* en casa.", fr: "Je suis à la maison."}
+
+  ir:
+    en: "to go"
+    fr: "aller"
+    presente:        [voy, vas, va, vamos, vais, van]
+    indefinido:      [fui, fuiste, fue, fuimos, fuisteis, fueron]
+    imperfecto:      [iba, ibas, iba, íbamos, ibais, iban]
+    futuro:          [iré, irás, irá, iremos, iréis, irán]
+    condicional:     [iría, irías, iría, iríamos, iríais, irían]
+    subj_presente:   [vaya, vayas, vaya, vayamos, vayáis, vayan]
+    subj_imperfecto: [fuera, fueras, fuera, fuéramos, fuerais, fueran]
+    imperativo:      [ve, vaya, vamos, id, vayan]
+    gerundio: yendo
+    participio: ido
+    examples:
+      - {es: "*Voy* al trabajo en tranvía.", fr: "Je vais au travail en tram."}
+
+  tener:
+    en: "to have"
+    fr: "avoir"
+    presente:        [tengo, tienes, tiene, tenemos, tenéis, tienen]
+    indefinido:      [tuve, tuviste, tuvo, tuvimos, tuvisteis, tuvieron]
+    imperfecto:      [tenía, tenías, tenía, teníamos, teníais, tenían]
+    futuro:          [tendré, tendrás, tendrá, tendremos, tendréis, tendrán]
+    condicional:     [tendría, tendrías, tendría, tendríamos, tendríais, tendrían]
+    subj_presente:   [tenga, tengas, tenga, tengamos, tengáis, tengan]
+    subj_imperfecto: [tuviera, tuvieras, tuviera, tuviéramos, tuvierais, tuvieran]
+    imperativo:      [ten, tenga, tengamos, tened, tengan]
+    gerundio: teniendo
+    participio: tenido
+    examples:
+      - {es: "*Tengo* treinta años.", fr: "J’ai trente ans."}
+
+  venir:
+    en: "to come"
+    fr: "venir"
+    presente:        [vengo, vienes, viene, venimos, venís, vienen]
+    indefinido:      [vine, viniste, vino, vinimos, vinisteis, vinieron]
+    imperfecto:      [venía, venías, venía, veníamos, veníais, venían]
+    futuro:          [vendré, vendrás, vendrá, vendremos, vendréis, vendrán]
+    condicional:     [vendría, vendrías, vendría, vendríamos, vendríais, vendrían]
+    subj_presente:   [venga, vengas, venga, vengamos, vengáis, vengan]
+    subj_imperfecto: [viniera, vinieras, viniera, viniéramos, vinierais, vinieran]
+    imperativo:      [ven, venga, vengamos, venid, vengan]
+    gerundio: viniendo
+    participio: venido
+    examples:
+      - {es: "¿*Vienes* con nosotros?", fr: "Tu viens avec nous ?"}
+
+  decir:
+    en: "to say, to tell"
+    fr: "dire"
+    presente:        [digo, dices, dice, decimos, decís, dicen]
+    indefinido:      [dije, dijiste, dijo, dijimos, dijisteis, dijeron]
+    imperfecto:      [decía, decías, decía, decíamos, decíais, decían]
+    futuro:          [diré, dirás, dirá, diremos, diréis, dirán]
+    condicional:     [diría, dirías, diría, diríamos, diríais, dirían]
+    subj_presente:   [diga, digas, diga, digamos, digáis, digan]
+    subj_imperfecto: [dijera, dijeras, dijera, dijéramos, dijerais, dijeran]
+    imperativo:      [di, diga, digamos, decid, digan]
+    gerundio: diciendo
+    participio: dicho
+    examples:
+      - {es: "¿Qué *dices*?", fr: "Qu’est-ce que tu dis ?"}
+
+  oír:
+    en: "to hear"
+    fr: "entendre"
+    presente:        [oigo, oyes, oye, oímos, oís, oyen]
+    indefinido:      [oí, oíste, oyó, oímos, oísteis, oyeron]
+    imperfecto:      [oía, oías, oía, oíamos, oíais, oían]
+    futuro:          [oiré, oirás, oirá, oiremos, oiréis, oirán]
+    condicional:     [oiría, oirías, oiría, oiríamos, oiríais, oirían]
+    subj_presente:   [oiga, oigas, oiga, oigamos, oigáis, oigan]
+    subj_imperfecto: [oyera, oyeras, oyera, oyéramos, oyerais, oyeran]
+    imperativo:      [oye, oiga, oigamos, oíd, oigan]
+    gerundio: oyendo
+    participio: oído
+    examples:
+      - {es: "No te *oigo* bien.", fr: "Je ne t’entends pas bien."}
+
+  haber:
+    en: "to have (auxiliary); there is"
+    fr: "avoir (auxiliaire) ; il y a"
+    impersonal: hay
+    presente:        [he, has, ha, hemos, habéis, han]
+    indefinido:      [hube, hubiste, hubo, hubimos, hubisteis, hubieron]
+    imperfecto:      [había, habías, había, habíamos, habíais, habían]
+    futuro:          [habré, habrás, habrá, habremos, habréis, habrán]
+    condicional:     [habría, habrías, habría, habríamos, habríais, habrían]
+    subj_presente:   [haya, hayas, haya, hayamos, hayáis, hayan]
+    subj_imperfecto: [hubiera, hubieras, hubiera, hubiéramos, hubierais, hubieran]
+    imperativo:      [null, null, null, null, null]
+    gerundio: habiendo
+    participio: habido
+    examples:
+      - {es: "*Hay* dos bancos en esta calle.", fr: "Il y a deux banques dans cette rue."}
+
+  # ---------- only the future stem is needed ----------
+  caber:
+    en: "to fit"
+    fr: "tenir (dans), rentrer"
+    futuro:          [cabré, cabrás, cabrá, cabremos, cabréis, cabrán]
+    condicional:     [cabría, cabrías, cabría, cabríamos, cabríais, cabrían]
+  valer:
+    en: "to be worth, to cost"
+    fr: "valoir"
+    futuro:          [valdré, valdrás, valdrá, valdremos, valdréis, valdrán]
+    condicional:     [valdría, valdrías, valdría, valdríamos, valdríais, valdrían]
+
+# ---------------------------------------------------------------------
+#  Groups shown in the book (order = order on the page)
+# ---------------------------------------------------------------------
+groups:
+  models: [hablar, comer, vivir]
+  boot:
+    - {change: "e → ie", verbs: [querer, pensar, empezar]}
+    - {change: "o → ue", verbs: [poder, dormir, volver]}
+    - {change: "e → i",  verbs: [pedir, repetir]}
+    - {change: "u → ue", verbs: [jugar]}
+  yo_irregular: [hacer, poner, salir, traer, saber, conocer, ver, dar]
+  fully_irregular: [ser, estar, ir, tener, venir, decir, oír, haber]
+  reflexive: [levantarse, llamarse, ducharse]
+  imperfect_irregular: [ser, ir, ver]
+  subj_irregular: [ser, estar, ir, haber, saber, dar]
+  imperative_irregular: [decir, hacer, ir, poner, salir, ser, tener, venir]
+  top25: [ser, estar, haber, tener, hacer, poder, decir, ir, ver, dar,
+          saber, querer, poner, venir, salir, conocer, pensar, volver, pedir,
+          dormir, oír, traer, empezar, jugar, sentir]
+
+# ---------------------------------------------------------------------
+#  Gustar-type verbs: the verb agrees with the THING, not the person
+# ---------------------------------------------------------------------
+gustar_pronouns:
+  - {stress: "a mí",               pron: me,  fr: "à moi"}
+  - {stress: "a ti",               pron: te,  fr: "à toi"}
+  - {stress: "a él / a ella / a usted", pron: le, fr: "à lui / à elle / à vous (politesse)"}
+  - {stress: "a nosotros/as",      pron: nos, fr: "à nous"}
+  - {stress: "a vosotros/as",      pron: os,  fr: "à vous (pluriel)"}
+  - {stress: "a ellos / a ellas / a ustedes", pron: les, fr: "à eux / à elles / à vous (pluriel poli)"}
+
+gustar_type:
+  - {verb: gustar,    en: "to please → to like",          fr: "plaire → aimer",         sg: gusta,    pl: gustan}
+  - {verb: encantar,  en: "to delight → to love",         fr: "adorer",         sg: encanta,  pl: encantan}
+  - {verb: interesar, en: "to interest",                  fr: "intéresser",     sg: interesa, pl: interesan}
+  - {verb: doler,     en: "to hurt",                      fr: "faire mal",      sg: duele,    pl: duelen}
+  - {verb: molestar,  en: "to bother",                    fr: "déranger, gêner", sg: molesta, pl: molestan}
+
+# ---------------------------------------------------------------------
+#  Example sentences by topic (the conjugated verb is between *stars*)
+# ---------------------------------------------------------------------
+sentences:
+  gustar:
+    - {es: "*Me gusta* el café.", fr: "J’aime le café. (Le café me plaît.)"}
+    - {es: "*Me gustan* los idiomas.", fr: "J’aime les langues."}
+    - {es: "¿*Te gusta* bailar?", fr: "Tu aimes danser ?"}
+    - {es: "A mi madre *le encanta* el té con menta.", fr: "Ma mère adore le thé à la menthe."}
+    - {es: "*Nos interesa* mucho la historia.", fr: "L’histoire nous intéresse beaucoup."}
+    - {es: "*Me duele* la cabeza.", fr: "J’ai mal à la tête."}
+    - {es: "*Me duelen* los pies.", fr: "J’ai mal aux pieds."}
+    - {es: "*Le molesta* el ruido.", fr: "Le bruit le / la dérange."}
+
+  ser:
+    - {es: "*Soy* profesora.", fr: "Je suis professeure. (sans article !)"}
+    - {es: "Ahmed *es* de Tánger.", fr: "Ahmed est de Tanger."}
+    - {es: "*Son* las cinco.", fr: "Il est cinq heures."}
+    - {es: "La fiesta *es* en mi casa.", fr: "La fête a lieu chez moi. (événement → ser)"}
+  estar:
+    - {es: "Sevilla *está* en Andalucía.", fr: "Séville est en Andalousie."}
+    - {es: "Hoy *estoy* cansado.", fr: "Aujourd’hui, je suis fatigué."}
+    - {es: "*Estamos* comiendo.", fr: "Nous sommes en train de manger."}
+    - {es: "La sopa *está* fría.", fr: "La soupe est froide."}
+
+  perfecto:
+    - {es: "Hoy *he comido* cuscús.", fr: "Aujourd’hui, j’ai mangé du couscous."}
+    - {es: "Esta semana *hemos trabajado* mucho.", fr: "Cette semaine, nous avons beaucoup travaillé."}
+    - {es: "¿*Has estado* alguna vez en México?", fr: "Tu es déjà allé au Mexique ?"}
+    - {es: "Todavía no *he hecho* los deberes.", fr: "Je n’ai pas encore fait mes devoirs."}
+
+  indefinido:
+    - {es: "Ayer *hablé* con mi madre.", fr: "Hier, j’ai parlé avec ma mère."}
+    - {es: "En 2019 *viví* en Valencia.", fr: "En 2019, j’ai vécu à Valence."}
+    - {es: "El verano pasado *fuimos* a Granada.", fr: "L’été dernier, nous sommes allés à Grenade."}
+    - {es: "¿Qué *hiciste* el sábado?", fr: "Qu’est-ce que tu as fait samedi ?"}
+    - {es: "Ella *pidió* una pizza.", fr: "Elle a commandé une pizza."}
+
+  imperfecto:
+    - {es: "De niña, *vivía* en Fez.", fr: "Petite, j’habitais à Fès."}
+    - {es: "Siempre *comíamos* juntos.", fr: "Nous mangions toujours ensemble."}
+    - {es: "*Íbamos* a la playa todos los veranos.", fr: "Nous allions à la plage tous les étés."}
+    - {es: "*Era* un día precioso.", fr: "C’était une journée magnifique."}
+
+  contrast:
+    - {es: "*Estudiaba* cuando *sonó* el teléfono.", fr: "J’étudiais quand le téléphone a sonné."}
+    - {es: "*Hacía* sol, así que *fuimos* a la playa.", fr: "Il faisait beau, alors nous sommes allés à la plage."}
+    - {es: "*Era* tarde y *llovía*. De repente, *llegó* un taxi.", fr: "Il était tard et il pleuvait. Soudain, un taxi est arrivé."}
+
+  ir_a:
+    - {es: "*Voy a* estudiar esta tarde.", fr: "Je vais étudier cet après-midi."}
+    - {es: "¿Qué *vas a* hacer mañana?", fr: "Qu’est-ce que tu vas faire demain ?"}
+    - {es: "*Vamos a* cenar fuera.", fr: "Nous allons dîner au restaurant."}
+
+  futuro:
+    - {es: "Mañana *hablaré* con él.", fr: "Demain, je lui parlerai."}
+    - {es: "El lunes *tendremos* más tiempo.", fr: "Lundi, nous aurons plus de temps."}
+    - {es: "¿*Vendrás* a la boda?", fr: "Tu viendras au mariage ?"}
+
+  condicional:
+    - {es: "*Me gustaría* un té, por favor.", fr: "Je voudrais un thé, s’il vous plaît."}
+    - {es: "¿*Podrías* ayudarme?", fr: "Tu pourrais m’aider ?"}
+    - {es: "Yo que tú, *hablaría* con ella.", fr: "À ta place, je lui parlerais."}
+
+  imperativo:
+    - {es: "*Habla* más despacio, por favor.", fr: "Parle plus lentement, s’il te plaît."}
+    - {es: "¡*Ven* aquí!", fr: "Viens ici !"}
+    - {es: "*Pase*, por favor.", fr: "Entrez, je vous en prie. (usted)"}
+    - {es: "No *hables* tan alto.", fr: "Ne parle pas si fort."}
+
+  pronouns:
+    - {es: "*Levántate*.", fr: "Lève-toi.", note: "levanta + te : l’accent tonique reste sur -van- → accent écrit"}
+    - {es: "*Dímelo*.", fr: "Dis-le-moi.", note: "di + me + lo"}
+    - {es: "*Siéntese*, por favor.", fr: "Asseyez-vous, je vous en prie. (usted)", note: "siente + se"}
+    - {es: "*Hazlo* ahora.", fr: "Fais-le maintenant.", note: "haz + lo : pas d’accent"}
+    - {es: "No *te levantes*.", fr: "Ne te lève pas.", note: "négatif : pronom avant le verbe"}
+    - {es: "No *me lo digas*.", fr: "Ne me le dis pas.", note: "négatif : pronoms avant le verbe"}
+
+  subj_uses:
+    wishes:
+      - {es: "Quiero que *vengas*.", fr: "Je veux que tu viennes."}
+      - {es: "Ojalá *haga* buen tiempo.", fr: "Pourvu qu’il fasse beau."}
+    emotions:
+      - {es: "Me alegra que *estés* aquí.", fr: "Je suis content que tu sois là."}
+      - {es: "Siento que *tengas* problemas.", fr: "Je suis désolé que tu aies des problèmes."}
+    doubt:
+      - {es: "No creo que *sea* verdad.", fr: "Je ne crois pas que ce soit vrai."}
+      - {es: "Dudo que *lleguen* a tiempo.", fr: "Je doute qu’ils arrivent à l’heure."}
+    purpose:
+      - {es: "Te lo explico para que lo *entiendas*.", fr: "Je te l’explique pour que tu le comprennes."}
+    time:
+      - {es: "Cuando *llegues*, llámame.", fr: "Quand tu arriveras, appelle-moi."}
+      - {es: "Te escribo en cuanto *sepa* algo.", fr: "Je t’écris dès que je saurai quelque chose."}
+    advice:
+      - {es: "Es importante que *duermas* bien.", fr: "Il est important que tu dormes bien."}
+      - {es: "Te recomiendo que *pidas* el cuscús.", fr: "Je te conseille de commander le couscous."}
+
+  subj_imperfecto:
+    - {es: "Si *tuviera* tiempo, viajaría más.", fr: "Si j’avais le temps, je voyagerais plus."}
+    - {es: "Quería que *vinieras*.", fr: "Je voulais que tu viennes."}
+    - {es: "Si *fuera* tú, no lo haría.", fr: "Si j’étais toi, je ne le ferais pas."}
+
+# ---------------------------------------------------------------------
+#  EXERCISES
+#  item with lookup -> the answer is read from the verb tables above
+#  item with answer -> a free answer (translation, person, stem …)
+#  Explanatory text (translations, titles) is in French.
+#  lookup tense "perfecto"       = presente of haber + participio
+#  lookup tense "imperativo_neg" = no + presente de subjuntivo
+# ---------------------------------------------------------------------
+exercises:
+  part0:
+    - title: "Qui est-ce ? Trouve la personne grâce à la terminaison."
+      items:
+        - {q: "comemos", answer: "nosotros"}
+        - {q: "vives", answer: "tú"}
+        - {q: "hablan", answer: "ellos / ellas / ustedes"}
+        - {q: "bebo", answer: "yo"}
+        - {q: "estudiáis", answer: "vosotros"}
+        - {q: "trabaja", answer: "él / ella / usted"}
+    - title: "Trouve le radical."
+      items:
+        - {q: "aprender", answer: "aprend-"}
+        - {q: "escribir", answer: "escrib-"}
+        - {q: "estudiar", answer: "estudi-"}
+    - title: "Construis la forme : radical + voyelle + marque."
+      items:
+        - {q: "trabaj- + a + (nosotros)", lookup: {verb: trabajar, tense: presente, person: nosotros}}
+        - {q: "beb- + e + (ellos)", lookup: {verb: beber, tense: presente, person: ellos}}
+        - {q: "habl- + a + (tú)", lookup: {verb: hablar, tense: presente, person: tu}}
+
+  part1:
+    - title: "Complète avec le présent."
+      items:
+        - {q: "Yo ___ francés y árabe. (hablar)", lookup: {verb: hablar, tense: presente, person: yo}}
+        - {q: "Nosotros ___ en Casablanca. (vivir)", lookup: {verb: vivir, tense: presente, person: nosotros}}
+        - {q: "¿Tú ___ carne? (comer)", lookup: {verb: comer, tense: presente, person: tu}}
+        - {q: "Ella ___ un café. (querer)", lookup: {verb: querer, tense: presente, person: el}}
+        - {q: "Nosotros no ___ venir mañana. (poder)", lookup: {verb: poder, tense: presente, person: nosotros}}
+        - {q: "Mis padres ___ poco. (dormir)", lookup: {verb: dormir, tense: presente, person: ellos}}
+        - {q: "¿Vosotros ___ al tenis? (jugar)", lookup: {verb: jugar, tense: presente, person: vosotros}}
+        - {q: "Yo ___ los deberes por la noche. (hacer)", lookup: {verb: hacer, tense: presente, person: yo}}
+        - {q: "Yo no ___ a tu hermana. (conocer)", lookup: {verb: conocer, tense: presente, person: yo}}
+        - {q: "¿___ (tú) con nosotros? (venir)", lookup: {verb: venir, tense: presente, person: tu, cap: true}}
+    - title: "Ser ou estar ?"
+      items:
+        - {q: "Madrid ___ en España.", lookup: {verb: estar, tense: presente, person: el}}
+        - {q: "Mi hermano ___ médico.", lookup: {verb: ser, tense: presente, person: el}}
+        - {q: "Hoy (yo) ___ muy cansada.", lookup: {verb: estar, tense: presente, person: yo}}
+    - title: "Gusta ou gustan ?"
+      items:
+        - {q: "Me ___ los libros de historia.", lookup: {verb: gustar, tense: presente, person: ellos}}
+        - {q: "A Leila le ___ el té.", lookup: {verb: gustar, tense: presente, person: el}}
+
+  part2:
+    - title: "Pretérito perfecto : haber + participe."
+      items:
+        - {q: "Hoy (yo) ___ en casa. (comer)", lookup: {verb: comer, tense: perfecto, person: yo}}
+        - {q: "Esta semana (nosotros) ___ mucho. (trabajar)", lookup: {verb: trabajar, tense: perfecto, person: nosotros}}
+        - {q: "¿___ (tú) la película? (ver)", lookup: {verb: ver, tense: perfecto, person: tu, cap: true}}
+        - {q: "Todavía no (ellos) ___ nada. (decir)", lookup: {verb: decir, tense: perfecto, person: ellos}}
+    - title: "Indefinido : une action terminée."
+      items:
+        - {q: "Ayer (yo) ___ con Marta. (hablar)", lookup: {verb: hablar, tense: indefinido, person: yo}}
+        - {q: "El año pasado ellos ___ a Granada. (ir)", lookup: {verb: ir, tense: indefinido, person: ellos}}
+        - {q: "Ella ___ una pizza. (pedir)", lookup: {verb: pedir, tense: indefinido, person: el}}
+        - {q: "Anoche (yo) no ___ dormir. (poder)", lookup: {verb: poder, tense: indefinido, person: yo}}
+        - {q: "¿Qué ___ (tú) el sábado? (hacer)", lookup: {verb: hacer, tense: indefinido, person: tu}}
+    - title: "Imperfecto : décor et habitudes."
+      items:
+        - {q: "De niño, (yo) ___ en Fez. (vivir)", lookup: {verb: vivir, tense: imperfecto, person: yo}}
+        - {q: "Antes (nosotros) ___ a la playa cada verano. (ir)", lookup: {verb: ir, tense: imperfecto, person: nosotros}}
+        - {q: "___ las diez de la noche. (ser)", lookup: {verb: ser, tense: imperfecto, person: ellos, cap: true}}
+    - title: "Traduis en espagnol."
+      items:
+        - {q: "J’étudiais quand mon ami est arrivé.", answer: "Estudiaba cuando llegó mi amigo / mi amiga."}
+
+  part3:
+    - title: "Ir a + infinitif."
+      items:
+        - {q: "Mañana (yo) ___ estudiar.", answer: "voy a"}
+        - {q: "¿Qué ___ hacer vosotros el domingo?", answer: "vais a"}
+    - title: "Futuro simple."
+      items:
+        - {q: "El lunes (yo) ___ tiempo. (tener)", lookup: {verb: tener, tense: futuro, person: yo}}
+        - {q: "¿Qué ___ vosotros en verano? (hacer)", lookup: {verb: hacer, tense: futuro, person: vosotros}}
+        - {q: "Mis tíos ___ en mayo. (venir)", lookup: {verb: venir, tense: futuro, person: ellos}}
+        - {q: "Tú ___ hacerlo. (poder)", lookup: {verb: poder, tense: futuro, person: tu}}
+        - {q: "Nosotros ___ en Madrid. (vivir)", lookup: {verb: vivir, tense: futuro, person: nosotros}}
+        - {q: "Mañana te lo ___ (yo). (decir)", lookup: {verb: decir, tense: futuro, person: yo}}
+    - title: "Condicional."
+      items:
+        - {q: "¿___ (tú) ayudarme? (poder)", lookup: {verb: poder, tense: condicional, person: tu, cap: true}}
+        - {q: "Me ___ un zumo de naranja. (gustar)", lookup: {verb: gustar, tense: condicional, person: el}}
+        - {q: "Yo que tú, no lo ___. (hacer)", lookup: {verb: hacer, tense: condicional, person: yo}}
+        - {q: "Nosotros ___ más tarde. (salir)", lookup: {verb: salir, tense: condicional, person: nosotros}}
+
+  part4:
+    - title: "Tú, affirmatif."
+      items:
+        - {q: "___ más despacio. (hablar)", lookup: {verb: hablar, tense: imperativo, person: tu, cap: true}}
+        - {q: "___ aquí. (venir)", lookup: {verb: venir, tense: imperativo, person: tu, cap: true}}
+        - {q: "___ los deberes. (hacer)", lookup: {verb: hacer, tense: imperativo, person: tu, cap: true}}
+        - {q: "___ la verdad. (decir)", lookup: {verb: decir, tense: imperativo, person: tu, cap: true}}
+        - {q: "___ la mesa. (poner)", lookup: {verb: poner, tense: imperativo, person: tu, cap: true}}
+        - {q: "___ cuidado. (tener)", lookup: {verb: tener, tense: imperativo, person: tu, cap: true}}
+    - title: "Usted / ustedes."
+      items:
+        - {q: "___ más alto, por favor. (hablar, usted)", lookup: {verb: hablar, tense: imperativo, person: usted, cap: true}}
+        - {q: "___ mañana a las diez. (venir, ustedes)", lookup: {verb: venir, tense: imperativo, person: ustedes, cap: true}}
+    - title: "Mets à la forme négative."
+      items:
+        - {q: "Come eso. → ___ eso.", lookup: {verb: comer, tense: imperativo_neg, person: tu, cap: true}}
+        - {q: "Ve a la fiesta. → ___ a la fiesta.", lookup: {verb: ir, tense: imperativo_neg, person: tu, cap: true}}
+    - title: "Attache le pronom."
+      items:
+        - {q: "(levantarse, tú) ___ ya.", answer: "Levántate"}
+        - {q: "(decir + me, tú) ___ la verdad.", answer: "Dime"}
+
+  part5:
+    - title: "Subjonctif présent."
+      items:
+        - {q: "Quiero que (tú) ___ a la fiesta. (venir)", lookup: {verb: venir, tense: subj_presente, person: tu}}
+        - {q: "Espero que (vosotros) ___ bien. (estar)", lookup: {verb: estar, tense: subj_presente, person: vosotros}}
+        - {q: "Ojalá (nosotros) ___ suerte. (tener)", lookup: {verb: tener, tense: subj_presente, person: nosotros}}
+        - {q: "Te lo digo para que lo ___. (saber, tú)", lookup: {verb: saber, tense: subj_presente, person: tu}}
+        - {q: "Cuando (tú) ___ mayor, lo entenderás. (ser)", lookup: {verb: ser, tense: subj_presente, person: tu}}
+        - {q: "Dudo que ellos ___ hoy. (ir)", lookup: {verb: ir, tense: subj_presente, person: ellos}}
+        - {q: "No creo que (él) ___ venir. (poder)", lookup: {verb: poder, tense: subj_presente, person: el}}
+        - {q: "Es importante que (nosotros) ___ bien. (dormir)", lookup: {verb: dormir, tense: subj_presente, person: nosotros}}
+    - title: "Subjonctif imparfait."
+      items:
+        - {q: "Si (yo) ___ dinero, viajaría. (tener)", lookup: {verb: tener, tense: subj_imperfecto, person: yo}}
+        - {q: "Si (nosotros) ___ en Madrid, saldríamos más. (vivir)", lookup: {verb: vivir, tense: subj_imperfecto, person: nosotros}}
+        - {q: "Quería que (tú) ___ conmigo. (venir)", lookup: {verb: venir, tense: subj_imperfecto, person: tu}}
+    - title: "Transforme : commence par « Quiero que… »."
+      items:
+        - {q: "Haces los deberes. → Quiero que ___ los deberes.", lookup: {verb: hacer, tense: subj_presente, person: tu}}
