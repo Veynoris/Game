@@ -2,3 +2,4 @@ output/pages/
 output/verification/guide.txt
 __pycache__/
 .pytest_cache/
+verbecc.log
